@@ -1,5 +1,7 @@
 [core]
-    remote = myremote
+    remote = gdrive
 ['remote "myremote"']
     url = s3://milestone2/myremote
-    endpointurl = "https://nyc3.digitaloceanspaces.com"
+    endpointurl = https://nyc3.digitaloceanspaces.com
+['remote "gdrive"']
+    url = gdrive://1tGzERxH9dl3jrtEfVgnm2-vTPOSG3c8M
