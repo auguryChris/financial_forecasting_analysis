@@ -60,7 +60,7 @@
 58,BKR,Baker Hughes,Energy,Oil & Gas Equipment & Services,2017
 59,BLL,Ball Corp,Materials,Metal & Glass Containers,1880
 60,BAC,Bank of America,Financials,Diversified Banks,1998 (1923 / 1874)
-61,BBWI,"Bath & Body Works, Inc.",Consumer Discretionary,Specialty Stores,1963
+61,BBWI,Bath & Body Works,Consumer Discretionary,Specialty Stores,1963
 62,BAX,Baxter International,Health Care,Health Care Equipment,1931
 63,BDX,Becton Dickinson,Health Care,Health Care Equipment,1897
 64,BRK.B,Berkshire Hathaway,Financials,Multi-Sector Holdings,1839
@@ -84,7 +84,7 @@
 82,CDNS,Cadence Design Systems,Information Technology,Application Software,1988
 83,CZR,Caesars Entertainment,Consumer Discretionary,Casinos & Gaming,1973
 84,CPB,Campbell Soup,Consumer Staples,Packaged Foods & Meats,1869
-85,COF,Capital One Financial,Financials,Consumer Finance,1994
+85,COF,Capital One,Financials,Consumer Finance,1994
 86,CAH,Cardinal Health,Health Care,Health Care Distributors,1971
 87,KMX,CarMax,Consumer Discretionary,Specialty Stores,1993
 88,CCL,Carnival Corporation,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1972
@@ -95,15 +95,15 @@
 93,CBRE,CBRE,Real Estate,Real Estate Services,1906
 94,CDW,CDW,Information Technology,Technology Distributors,1984
 95,CE,Celanese,Materials,Specialty Chemicals,1918
-96,CNC,Centene Corporation,Health Care,Managed Health Care,1984
+96,CNC,Centene,Health Care,Managed Health Care,1984
 97,CNP,CenterPoint Energy,Utilities,Multi-Utilities,1882
 98,CDAY,Ceridian,Information Technology,Application Software,1992
 99,CERN,Cerner,Health Care,Health Care Technology,1979
 100,CF,CF Industries,Materials,Fertilizers & Agricultural Chemicals,1946
 101,CRL,Charles River Laboratories,Health Care,Life Sciences Tools & Services,1947
-102,SCHW,Charles Schwab Corporation,Financials,Investment Banking & Brokerage,1971
+102,SCHW,Charles Schwab,Financials,Investment Banking & Brokerage,1971
 103,CHTR,Charter Communications,Communication Services,Cable & Satellite,1993
-104,CVX,Chevron Corporation,Energy,Integrated Oil & Gas,1879
+104,CVX,Chevron,Energy,Integrated Oil & Gas,1879
 105,CMG,Chipotle Mexican Grill,Consumer Discretionary,Restaurants,1993
 106,CB,Chubb,Financials,Property & Casualty Insurance,1985
 107,CHD,Church & Dwight,Consumer Staples,Household Products,1847
@@ -117,7 +117,7 @@
 115,CLX,Clorox,Consumer Staples,Household Products,1913
 116,CME,CME Group,Financials,Financial Exchanges & Data,1848
 117,CMS,CMS Energy,Utilities,Multi-Utilities,1886
-118,KO,Coca-Cola Company,Consumer Staples,Soft Drinks,1886
+118,KO,Coca-Cola,Consumer Staples,Soft Drinks,1886
 119,CTSH,Cognizant Technology Solutions,Information Technology,IT Consulting & Other Services,1994
 120,CL,Colgate-Palmolive,Consumer Staples,Household Products,1806
 121,CMCSA,Comcast,Communication Services,Cable & Satellite,1963
@@ -137,7 +137,7 @@
 135,CMI,Cummins,Industrials,Industrial Machinery,1919
 136,CVS,CVS Health,Health Care,Health Care Services,1996
 137,DHI,D. R. Horton,Consumer Discretionary,Homebuilding,1978
-138,DHR,Danaher Corporation,Health Care,Health Care Equipment,1969
+138,DHR,Danaher,Health Care,Health Care Equipment,1969
 139,DRI,Darden Restaurants,Consumer Discretionary,Restaurants,1938
 140,DVA,DaVita,Health Care,Health Care Facilities,1979
 141,DE,Deere & Co.,Industrials,Agricultural & Farm Machinery,1837
@@ -169,7 +169,7 @@
 167,EIX,Edison International,Utilities,Electric Utilities,1886
 168,EW,Edwards Lifesciences,Health Care,Health Care Equipment,1958
 169,EA,Electronic Arts,Communication Services,Interactive Home Entertainment,1982
-170,EMR,Emerson Electric Company,Industrials,Electrical Components & Equipment,1890
+170,EMR,Emerson Electric,Industrials,Electrical Components & Equipment,1890
 171,ENPH,Enphase Energy,Information Technology,Electronic Components,2006
 172,ETR,Entergy,Utilities,Electric Utilities,1913
 173,EOG,EOG Resources,Energy,Oil & Gas Exploration & Production,1999
@@ -287,7 +287,7 @@
 285,LEG,Leggett & Platt,Consumer Discretionary,Home Furnishings,1883
 286,LDOS,Leidos,Industrials,Diversified Support Services,1969
 287,LEN,Lennar,Consumer Discretionary,Homebuilding,1954
-288,LLY,Eli Lilly & Co,Health Care,Pharmaceuticals,1876
+288,LLY,Eli Lilly,Health Care,Pharmaceuticals,1876
 289,LNC,Lincoln National,Financials,Multi-line Insurance,1905
 290,LIN,Linde,Materials,Industrial Gases,1879
 291,LYV,Live Nation Entertainment,Communication Services,Movies & Entertainment,2010
@@ -311,7 +311,7 @@
 309,MCD,McDonald's,Consumer Discretionary,Restaurants,1940
 310,MCK,McKesson Corporation,Health Care,Health Care Distributors,1833
 311,MDT,Medtronic,Health Care,Health Care Equipment,1949
-312,MRK,Merck & Co.,Health Care,Pharmaceuticals,1891
+312,MRK,Merck,Health Care,Pharmaceuticals,1891
 313,MET,MetLife,Financials,Life & Health Insurance,1868
 314,MTD,Mettler Toledo,Health Care,Life Sciences Tools & Services,1945
 315,MGM,MGM Resorts International,Consumer Discretionary,Casinos & Gaming,1986
@@ -321,11 +321,11 @@
 319,MAA,Mid-America Apartments,Real Estate,Residential REITs,1977
 320,MRNA,Moderna,Health Care,Biotechnology,2010
 321,MHK,Mohawk Industries,Consumer Discretionary,Home Furnishings,1878
-322,TAP,Molson Coors Beverage Company,Consumer Staples,Brewers,"2005 (Molson 1786, Coors 1873)"
+322,TAP,Molson Coors,Consumer Staples,Brewers,"2005 (Molson 1786, Coors 1873)"
 323,MDLZ,Mondelez International,Consumer Staples,Packaged Foods & Meats,2012
 324,MPWR,Monolithic Power Systems,Information Technology,Semiconductors,1997
 325,MNST,Monster Beverage,Consumer Staples,Soft Drinks,2012 (1935)
-326,MCO,Moody's Corporation,Financials,Financial Exchanges & Data,1909
+326,MCO,Moody's,Financials,Financial Exchanges & Data,1909
 327,MS,Morgan Stanley,Financials,Investment Banking & Brokerage,1935
 328,MOS,The Mosaic Company,Materials,Fertilizers & Agricultural Chemicals,2004 (1865 / 1909)
 329,MSI,Motorola Solutions,Information Technology,Communications Equipment,1928 (2011)
@@ -435,7 +435,7 @@
 433,TROW,T. Rowe Price,Financials,Asset Management & Custody Banks,1937
 434,TTWO,Take-Two Interactive,Communication Services,Interactive Home Entertainment,1993
 435,TPR,Tapestry,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2017
-436,TGT,Target Corporation,Consumer Discretionary,General Merchandise Stores,1902
+436,TGT,Target,Consumer Discretionary,General Merchandise Stores,1902
 437,TEL,TE Connectivity,Information Technology,Electronic Manufacturing Services,2007
 438,TDY,Teledyne Technologies,Industrials,Aerospace & Defense,1960
 439,TFX,Teleflex,Health Care,Health Care Equipment,1943

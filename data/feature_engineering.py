@@ -11,11 +11,8 @@ import ta
 import pandas as pd
 import os
 
-path = os.getcwd()
-path = path + '/financial_forecasting_analysis/data/data/og_raw_data.pkl'
-
+path = '../data/raw_data.pkl'
 df = pd.read_pickle(path)
-#df = df.head(100000)
 
 def add_features(df):
 
@@ -110,13 +107,13 @@ def add_features(df):
             # Accumulation/Distribution Index Indicator (ADI)
             df0['ADI'] = ta.volume.AccDistIndexIndicator(high=df0['High'],low=df0['Low'],close=df0['Close'],volume=df0['Volume']).acc_dist_index()
 
-    # Getting daily returns (pct and log) for 1,2,3 days
-    return_days = [1,2,3]
-    for day in return_days:
-        df0[f'{day}_day_return'] = (df0['Close'] / df0['Close'].shift(day)) - 1
-        df0[f'{day}_day_log_return'] = (np.log(df0['Close']) - np.log(df0['Close'].shift(day)) )* 100
+        # Getting daily returns (pct and log) for 1,2,3 days
+        return_days = [1,2,3]
+        for day in return_days:
+            df0[f'{day}_day_return'] = (df0['Close'] / df0['Close'].shift(day)) - 1
+            df0[f'{day}_day_log_return'] = (np.log(df0['Close']) - np.log(df0['Close'].shift(day)) )* 100
 
-    all_tickers.append(df0)
+        all_tickers.append(df0)
 
     final = pd.concat(all_tickers)
     final = final.sort_values(by=['reportperiod','ticker'])
@@ -124,6 +121,3 @@ def add_features(df):
     return final
 
 df = add_features(df)
-
-with open('data_with_features.pkl', 'wb+') as out:
-    pickle.dump(df, out)

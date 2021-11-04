@@ -3,12 +3,13 @@
 
 #%%
 # Import libraries
+import requests
 import pandas as pd
+import numpy as np
 from datetime import date
 from pandas.tseries.offsets import BDay
 import sys, os
 import pickle
-import ta
 
 #!pip install quandl
 import quandl
@@ -20,9 +21,9 @@ import yfinance as yf
 from pandas_datareader import data as pdr
 
 # API Credentials
-quandl.ApiConfig.api_key = 'yKgmpFG_gh-kr8LNkPa4'
+quandl.ApiConfig.api_key = 'ufyMTAbgF8LmdWSFWRDT'
 
-#%%
+
 # S&P 500 Scraper
 def sp500_list_retrieval():
     """
@@ -219,9 +220,8 @@ def data_collection(timeframe='MRT', ticker=[], start_yr='2016', end_date=None):
 
     return final
 
+#x = data_collection()
 
-x = data_collection()
-#
 if __name__ == '__main__':
 #    import argparse
 #
@@ -231,7 +231,8 @@ if __name__ == '__main__':
 #    args = parser.parse_args()
 #
     # Collect data
-    df = data_collection()
+    df = data_collection(start_yr='2000')
 
-    with open('//data/raw_data.pkl', 'wb+') as out:
+    with open('raw_data.pkl', 'wb+') as out:
         pickle.dump(df, out)
+
