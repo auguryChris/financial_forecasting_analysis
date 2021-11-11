@@ -55,7 +55,7 @@ def sp500_list_retrieval():
               inplace=True
               )
 
-    df.to_csv("SP500_list.csv")
+    df.to_csv("../data/SP500_list.csv")
     return df
 
 # Fundamental Data Pull from Quandl
@@ -233,5 +233,7 @@ if __name__ == '__main__':
     # Collect data
     df = data_collection(start_yr='2000')
 
-    with open('raw_data.pkl', 'wb+') as out:
+    with open('../data/raw_data.pkl', 'wb+') as out:
         pickle.dump(df, out)
+
+# %%

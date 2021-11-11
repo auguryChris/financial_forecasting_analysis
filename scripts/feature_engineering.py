@@ -6,13 +6,13 @@ Created on Tue Nov  2 10:58:53 2021
 @author: Allie
 """
 #%%
-#import pickle
+import pickle
 import ta
 import pandas as pd
 import os
+import numpy as np
 
-path = '../data/raw_data.pkl'
-df = pd.read_pickle(path)
+
 
 def add_features(df):
 
@@ -120,4 +120,29 @@ def add_features(df):
 
     return final
 
-df = add_features(df)
+if __name__ == '__main__':
+#    import argparse
+#
+#    parser = argparse.ArgumentParser
+#    parser.add_argument('output_file', help='raw dataset')
+#
+#    args = parser.parse_args()
+
+    # ALL RAW DATA
+    path = '../data/raw_data.pkl'
+    print('Reading Raw Data...')
+    df = pd.read_pickle(path)
+
+    # Tickers chosen from clustering/sector selections
+    tickers = ['MSFT', 'V', 'JNJ', 'XOM', 'ADSK', 'MTD', 'CARR', 'WAT']
+    df = df[df['ticker'].isin(tickers)]
+    
+    # Add technical features
+    print('Adding Technical Features...')
+    df = add_features(df)
+
+    for ticker in df['ticker'].unique():
+        df[df['ticker']==ticker].to_csv(f'../data/ticker_data/{ticker}_full_data.csv')
+        print(f'{ticker} added to data')
+    print('Done')
+# %%
