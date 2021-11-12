@@ -6,7 +6,7 @@
 import requests
 import pandas as pd
 import numpy as np
-from datetime import date
+from datetime import date, datetime
 from pandas.tseries.offsets import BDay
 import sys, os
 import pickle
@@ -23,6 +23,11 @@ from pandas_datareader import data as pdr
 # API Credentials
 quandl.ApiConfig.api_key = 'ufyMTAbgF8LmdWSFWRDT'
 
+absolutepath = os.path.abspath(__file__)
+fileDirectory = os.path.dirname(absolutepath)
+
+#Path of parent directory
+parentDirectory = os.path.dirname(fileDirectory)
 
 # S&P 500 Scraper
 def sp500_list_retrieval():
@@ -55,7 +60,7 @@ def sp500_list_retrieval():
               inplace=True
               )
 
-    df.to_csv("../data/SP500_list.csv")
+    df.to_csv(f"{parentDirectory}/data/SP500_list.csv")
     return df
 
 # Fundamental Data Pull from Quandl
@@ -231,9 +236,12 @@ if __name__ == '__main__':
 #    args = parser.parse_args()
 #
     # Collect data
-    df = data_collection(start_yr='2000')
+    df = data_collection(start_yr='2000') 
+    
+    # get date stamp
+    dateTimeObj = datetime.now().strftime("%Y-%m-%d_%H.%M.%S")
 
-    with open('../data/raw_data.pkl', 'wb+') as out:
+    with open(f'{parentDirectory}/data/raw_data_{dateTimeObj}.pkl', 'wb+') as out:
         pickle.dump(df, out)
 
 # %%
