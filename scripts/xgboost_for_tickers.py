@@ -120,16 +120,16 @@ class TickerXGBRegressor:
 
         y_hat = predictions
         y_test = actual
-        residuals = y_test - y_hat
+        #residuals = y_test - y_hat
         rolling_window=7
         
         y_hat_rolling = pd.DataFrame(y_hat).rolling(rolling_window).mean()
         y_test_rolling = pd.DataFrame(y_test).rolling(rolling_window).mean()
         n = range(len(y_hat_rolling))
         plt.figure(figsize=(15, 6))
-        plt.plot(n, y_test_rolling, 
+        plt.plot(n, y_test_rolling.iloc[:,0], 
                  color='red', label='y_test', alpha=0.5)
-        plt.plot(y_hat_rolling,
+        plt.plot(y_hat_rolling.iloc[:,0],
                  color='black', label='y_pred', alpha=0.8)
         plt.plot(np.mean(y_train)*np.ones((len(n),)),
                  color='blue', label='Training Mean', alpha=0.5)
@@ -151,24 +151,41 @@ class TickerXGBRegressor:
         self.timeframe = timeframe
         pred_df, features, target_name = self.create_prediction_df(df, target, timeframe,
                                                                    not_feature_list, normilization_type)
-        # SCALING
-        if scale_type=='minmax':
-            scaler = MinMaxScaler()
-            pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
-            self.scaler_dict = {scale_type: scaler}
-        elif scale_type=='standard':
-            scaler = StandardScaler()
-            pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
-            self.scaler_dict = {scale_type: scaler}
-        else:
-            self.scaler_dict = None
+        # # SCALING
+        # if scale_type=='minmax':
+        #     scaler = MinMaxScaler()
+        #     pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
+        #     self.scaler_dict = {scale_type: scaler}
+        # elif scale_type=='standard':
+        #     scaler = StandardScaler()
+        #     pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
+        #     self.scaler_dict = {scale_type: scaler}
+        # else:
+        #     self.scaler_dict = None
         
         # Train-Test Split
         X_train, X_test, y_train, y_test = train_test_split(
             pred_df[features], pred_df[target_name], test_size=test_size, shuffle=False)
-        # Test-Holdout Split
+        # Test-Holdout Split (50-50)
         X_test, X_hold, y_test, y_hold = train_test_split(
             X_test, y_test, test_size=0.50, shuffle=False)
+        
+        # SCALING
+        if scale_type=='minmax':
+            scaler = MinMaxScaler()
+            self.scaler_dict = {scale_type: scaler}
+        elif scale_type=='standard':
+            scaler = StandardScaler()
+            self.scaler_dict = {scale_type: scaler}
+        else:
+            self.scaler_dict = None
+        
+        if self.scaler_dict != None:
+            y_train = pd.Series(scaler.fit_transform(y_train.copy().values.reshape(-1, 1)).reshape(-1,), index=y_train.index)
+            y_test = pd.Series(scaler.transform(y_test.copy().values.reshape(-1, 1)).reshape(-1,), index=y_test.index)
+            y_hold = pd.Series(scaler.transform(y_hold.copy().values.reshape(-1, 1)).reshape(-1,), index=y_hold.index)
+            
+
         
         # Grid Search, Scores, Plotting Actual vs Predictions
         param_grid = ParameterGrid(gsearch_params)
