@@ -2,5 +2,8 @@
 **/.DS_Store
 
 /config.local
+/config.bak
 /tmp
 /cache
+config.local
+config.bak

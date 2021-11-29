@@ -188,130 +188,130 @@
 186,EXR,Extra Space Storage,Real Estate,Specialized REITs,1977
 187,XOM,ExxonMobil,Energy,Integrated Oil & Gas,1999
 188,FFIV,F5 Networks,Information Technology,Communications Equipment,1996
-189,FB,Facebook,Communication Services,Interactive Media & Services,2004
-190,FAST,Fastenal,Industrials,Building Products,1967
-191,FRT,Federal Realty Investment Trust,Real Estate,Retail REITs,1962
-192,FDX,FedEx,Industrials,Air Freight & Logistics,1971
-193,FIS,Fidelity National Information Services,Information Technology,Data Processing & Outsourced Services,1968
-194,FITB,Fifth Third Bancorp,Financials,Regional Banks,1858
-195,FE,FirstEnergy,Utilities,Electric Utilities,1997
-196,FRC,First Republic Bank,Financials,Regional Banks,1985
-197,FISV,Fiserv,Information Technology,Data Processing & Outsourced Services,1984
-198,FLT,Fleetcor,Information Technology,Data Processing & Outsourced Services,2000
-199,FMC,FMC Corporation,Materials,Fertilizers & Agricultural Chemicals,1883
-200,F,Ford,Consumer Discretionary,Automobile Manufacturers,1903
-201,FTNT,Fortinet,Information Technology,Systems Software,2000
-202,FTV,Fortive,Industrials,Industrial Machinery,2016
-203,FBHS,Fortune Brands Home & Security,Industrials,Building Products,2011 (1969)
-204,FOXA,Fox Corporation (Class A),Communication Services,Movies & Entertainment,2019
-205,FOX,Fox Corporation (Class B),Communication Services,Movies & Entertainment,2019
-206,BEN,Franklin Resources,Financials,Asset Management & Custody Banks,1947
-207,FCX,Freeport-McMoRan,Materials,Copper,1912
-208,GPS,Gap,Consumer Discretionary,Apparel Retail,1969
-209,GRMN,Garmin,Consumer Discretionary,Consumer Electronics,1989
-210,IT,Gartner,Information Technology,IT Consulting & Other Services,1979
-211,GNRC,Generac Holdings,Industrials,Electrical Components & Equipment,1959
-212,GD,General Dynamics,Industrials,Aerospace & Defense,1899
-213,GE,General Electric,Industrials,Industrial Conglomerates,1892
-214,GIS,General Mills,Consumer Staples,Packaged Foods & Meats,1856
-215,GM,General Motors,Consumer Discretionary,Automobile Manufacturers,1908
-216,GPC,Genuine Parts,Consumer Discretionary,Specialty Stores,1925
-217,GILD,Gilead Sciences,Health Care,Biotechnology,1987
-218,GL,Globe Life,Financials,Life & Health Insurance,1900
-219,GPN,Global Payments,Information Technology,Data Processing & Outsourced Services,2000
-220,GS,Goldman Sachs,Financials,Investment Banking & Brokerage,1869
-221,GWW,W. W. Grainger,Industrials,Industrial Machinery,1927
-222,HAL,Halliburton,Energy,Oil & Gas Equipment & Services,1919
-223,HBI,Hanesbrands,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2000
-224,HIG,The Hartford,Financials,Property & Casualty Insurance,1810
-225,HAS,Hasbro,Consumer Discretionary,Leisure Products,1923
-226,HCA,HCA Healthcare,Health Care,Health Care Facilities,1968
-227,PEAK,Healthpeak Properties,Real Estate,Health Care REITs,1985
-228,HSIC,Henry Schein,Health Care,Health Care Distributors,1932
-229,HSY,The Hershey Company,Consumer Staples,Packaged Foods & Meats,1894
-230,HES,Hess Corporation,Energy,Integrated Oil & Gas,1919
-231,HPE,Hewlett Packard Enterprise,Information Technology,"Technology Hardware, Storage & Peripherals",2015
-232,HLT,Hilton Worldwide,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1919
-233,HOLX,Hologic,Health Care,Health Care Equipment,1985
-234,HD,Home Depot,Consumer Discretionary,Home Improvement Retail,1978
-235,HON,Honeywell,Industrials,Industrial Conglomerates,1906
-236,HRL,Hormel,Consumer Staples,Packaged Foods & Meats,1891
-237,HST,Host Hotels & Resorts,Real Estate,Hotel & Resort REITs,1993
-238,HWM,Howmet Aerospace,Industrials,Aerospace & Defense,2016
-239,HPQ,HP,Information Technology,"Technology Hardware, Storage & Peripherals",1939 (2015)
-240,HUM,Humana,Health Care,Managed Health Care,1961
-241,HBAN,Huntington Bancshares,Financials,Regional Banks,1866
-242,HII,Huntington Ingalls Industries,Industrials,Aerospace & Defense,2011
-243,IEX,IDEX Corporation,Industrials,Industrial Machinery,1988
-244,IDXX,Idexx Laboratories,Health Care,Health Care Equipment,1983
-245,INFO,IHS Markit,Industrials,Research & Consulting Services,1959
-246,ITW,Illinois Tool Works,Industrials,Industrial Machinery,1912
-247,ILMN,Illumina,Health Care,Life Sciences Tools & Services,1998
-248,INCY,Incyte,Health Care,Biotechnology,1991
-249,IR,Ingersoll Rand,Industrials,Industrial Machinery,1859
-250,INTC,Intel,Information Technology,Semiconductors,1968
-251,ICE,Intercontinental Exchange,Financials,Financial Exchanges & Data,2000
-252,IBM,IBM,Information Technology,IT Consulting & Other Services,1911
-253,IP,International Paper,Materials,Paper Packaging,1898
-254,IPG,Interpublic Group,Communication Services,Advertising,1961 (1930)
-255,IFF,International Flavors & Fragrances,Materials,Specialty Chemicals,1958 (1889)
-256,INTU,Intuit,Information Technology,Application Software,1983
-257,ISRG,Intuitive Surgical,Health Care,Health Care Equipment,1995
-258,IVZ,Invesco,Financials,Asset Management & Custody Banks,1935
-259,IPGP,IPG Photonics,Information Technology,Electronic Manufacturing Services,1990
-260,IQV,IQVIA,Health Care,Life Sciences Tools & Services,1982
-261,IRM,Iron Mountain,Real Estate,Specialized REITs,1951
-262,JKHY,Jack Henry & Associates,Information Technology,Data Processing & Outsourced Services,1976
-263,J,Jacobs Engineering Group,Industrials,Construction & Engineering,1947
-264,JBHT,J. B. Hunt,Industrials,Trucking,1961
-265,SJM,JM Smucker,Consumer Staples,Packaged Foods & Meats,1897
-266,JNJ,Johnson & Johnson,Health Care,Pharmaceuticals,1886
-267,JCI,Johnson Controls,Industrials,Building Products,1885
-268,JPM,JPMorgan Chase,Financials,Diversified Banks,2000 (1799 / 1871)
-269,JNPR,Juniper Networks,Information Technology,Communications Equipment,1996
-270,KSU,Kansas City Southern,Industrials,Railroads,1887
-271,K,Kellogg's,Consumer Staples,Packaged Foods & Meats,1906
-272,KEY,KeyCorp,Financials,Regional Banks,1825
-273,KEYS,Keysight Technologies,Information Technology,Electronic Equipment & Instruments,2014
-274,KMB,Kimberly-Clark,Consumer Staples,Household Products,1872
-275,KIM,Kimco Realty,Real Estate,Retail REITs,1958
-276,KMI,Kinder Morgan,Energy,Oil & Gas Storage & Transportation,1997
-277,KLAC,KLA Corporation,Information Technology,Semiconductor Equipment,1975/1977 (1997)
-278,KHC,Kraft Heinz,Consumer Staples,Packaged Foods & Meats,2015 (1869)
-279,KR,Kroger,Consumer Staples,Food Retail,1883
-280,LHX,L3Harris Technologies,Industrials,Aerospace & Defense,2019 (1895)
-281,LH,LabCorp,Health Care,Health Care Services,1978
-282,LRCX,Lam Research,Information Technology,Semiconductor Equipment,1980
-283,LW,Lamb Weston,Consumer Staples,Packaged Foods & Meats,2016 (1950)
-284,LVS,Las Vegas Sands,Consumer Discretionary,Casinos & Gaming,1988
-285,LEG,Leggett & Platt,Consumer Discretionary,Home Furnishings,1883
-286,LDOS,Leidos,Industrials,Diversified Support Services,1969
-287,LEN,Lennar,Consumer Discretionary,Homebuilding,1954
-288,LLY,Eli Lilly,Health Care,Pharmaceuticals,1876
-289,LNC,Lincoln National,Financials,Multi-line Insurance,1905
-290,LIN,Linde,Materials,Industrial Gases,1879
-291,LYV,Live Nation Entertainment,Communication Services,Movies & Entertainment,2010
-292,LKQ,LKQ Corporation,Consumer Discretionary,Distributors,1998
-293,LMT,Lockheed Martin,Industrials,Aerospace & Defense,1995
-294,L,Loews Corporation,Financials,Multi-line Insurance,1959
-295,LOW,Lowe's,Consumer Discretionary,Home Improvement Retail,1904/1946/1959
-296,LUMN,Lumen Technologies,Communication Services,Alternative Carriers,1983 (1877)
-297,LYB,LyondellBasell,Materials,Specialty Chemicals,2007
-298,MTB,M&T Bank,Financials,Regional Banks,1856
-299,MRO,Marathon Oil,Energy,Oil & Gas Exploration & Production,1887
-300,MPC,Marathon Petroleum,Energy,Oil & Gas Refining & Marketing,2009 (1887)
-301,MKTX,MarketAxess,Financials,Financial Exchanges & Data,2000
-302,MAR,Marriott International,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1927
-303,MMC,Marsh & McLennan,Financials,Insurance Brokers,1905
-304,MLM,Martin Marietta Materials,Materials,Construction Materials,1993
-305,MAS,Masco,Industrials,Building Products,1929
-306,MA,Mastercard,Information Technology,Data Processing & Outsourced Services,1966
-307,MTCH,Match Group,Communication Services,Interactive Media & Services,1986
-308,MKC,McCormick & Company,Consumer Staples,Packaged Foods & Meats,1889
-309,MCD,McDonald's,Consumer Discretionary,Restaurants,1940
-310,MCK,McKesson Corporation,Health Care,Health Care Distributors,1833
-311,MDT,Medtronic,Health Care,Health Care Equipment,1949
-312,MRK,Merck,Health Care,Pharmaceuticals,1891
+189,FAST,Fastenal,Industrials,Building Products,1967
+190,FRT,Federal Realty Investment Trust,Real Estate,Retail REITs,1962
+191,FDX,FedEx,Industrials,Air Freight & Logistics,1971
+192,FIS,Fidelity National Information Services,Information Technology,Data Processing & Outsourced Services,1968
+193,FITB,Fifth Third Bancorp,Financials,Regional Banks,1858
+194,FE,FirstEnergy,Utilities,Electric Utilities,1997
+195,FRC,First Republic Bank,Financials,Regional Banks,1985
+196,FISV,Fiserv,Information Technology,Data Processing & Outsourced Services,1984
+197,FLT,Fleetcor,Information Technology,Data Processing & Outsourced Services,2000
+198,FMC,FMC Corporation,Materials,Fertilizers & Agricultural Chemicals,1883
+199,F,Ford,Consumer Discretionary,Automobile Manufacturers,1903
+200,FTNT,Fortinet,Information Technology,Systems Software,2000
+201,FTV,Fortive,Industrials,Industrial Machinery,2016
+202,FBHS,Fortune Brands Home & Security,Industrials,Building Products,2011 (1969)
+203,FOXA,Fox Corporation (Class A),Communication Services,Movies & Entertainment,2019
+204,FOX,Fox Corporation (Class B),Communication Services,Movies & Entertainment,2019
+205,BEN,Franklin Resources,Financials,Asset Management & Custody Banks,1947
+206,FCX,Freeport-McMoRan,Materials,Copper,1912
+207,GPS,Gap,Consumer Discretionary,Apparel Retail,1969
+208,GRMN,Garmin,Consumer Discretionary,Consumer Electronics,1989
+209,IT,Gartner,Information Technology,IT Consulting & Other Services,1979
+210,GNRC,Generac Holdings,Industrials,Electrical Components & Equipment,1959
+211,GD,General Dynamics,Industrials,Aerospace & Defense,1899
+212,GE,General Electric,Industrials,Industrial Conglomerates,1892
+213,GIS,General Mills,Consumer Staples,Packaged Foods & Meats,1856
+214,GM,General Motors,Consumer Discretionary,Automobile Manufacturers,1908
+215,GPC,Genuine Parts,Consumer Discretionary,Specialty Stores,1925
+216,GILD,Gilead Sciences,Health Care,Biotechnology,1987
+217,GL,Globe Life,Financials,Life & Health Insurance,1900
+218,GPN,Global Payments,Information Technology,Data Processing & Outsourced Services,2000
+219,GS,Goldman Sachs,Financials,Investment Banking & Brokerage,1869
+220,GWW,W. W. Grainger,Industrials,Industrial Machinery,1927
+221,HAL,Halliburton,Energy,Oil & Gas Equipment & Services,1919
+222,HBI,Hanesbrands,Consumer Discretionary,"Apparel, Accessories & Luxury Goods",2000
+223,HIG,The Hartford,Financials,Property & Casualty Insurance,1810
+224,HAS,Hasbro,Consumer Discretionary,Leisure Products,1923
+225,HCA,HCA Healthcare,Health Care,Health Care Facilities,1968
+226,PEAK,Healthpeak Properties,Real Estate,Health Care REITs,1985
+227,HSIC,Henry Schein,Health Care,Health Care Distributors,1932
+228,HSY,The Hershey Company,Consumer Staples,Packaged Foods & Meats,1894
+229,HES,Hess Corporation,Energy,Integrated Oil & Gas,1919
+230,HPE,Hewlett Packard Enterprise,Information Technology,"Technology Hardware, Storage & Peripherals",2015
+231,HLT,Hilton Worldwide,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1919
+232,HOLX,Hologic,Health Care,Health Care Equipment,1985
+233,HD,Home Depot,Consumer Discretionary,Home Improvement Retail,1978
+234,HON,Honeywell,Industrials,Industrial Conglomerates,1906
+235,HRL,Hormel,Consumer Staples,Packaged Foods & Meats,1891
+236,HST,Host Hotels & Resorts,Real Estate,Hotel & Resort REITs,1993
+237,HWM,Howmet Aerospace,Industrials,Aerospace & Defense,2016
+238,HPQ,HP,Information Technology,"Technology Hardware, Storage & Peripherals",1939 (2015)
+239,HUM,Humana,Health Care,Managed Health Care,1961
+240,HBAN,Huntington Bancshares,Financials,Regional Banks,1866
+241,HII,Huntington Ingalls Industries,Industrials,Aerospace & Defense,2011
+242,IEX,IDEX Corporation,Industrials,Industrial Machinery,1988
+243,IDXX,Idexx Laboratories,Health Care,Health Care Equipment,1983
+244,INFO,IHS Markit,Industrials,Research & Consulting Services,1959
+245,ITW,Illinois Tool Works,Industrials,Industrial Machinery,1912
+246,ILMN,Illumina,Health Care,Life Sciences Tools & Services,1998
+247,INCY,Incyte,Health Care,Biotechnology,1991
+248,IR,Ingersoll Rand,Industrials,Industrial Machinery,1859
+249,INTC,Intel,Information Technology,Semiconductors,1968
+250,ICE,Intercontinental Exchange,Financials,Financial Exchanges & Data,2000
+251,IBM,IBM,Information Technology,IT Consulting & Other Services,1911
+252,IP,International Paper,Materials,Paper Packaging,1898
+253,IPG,Interpublic Group,Communication Services,Advertising,1961 (1930)
+254,IFF,International Flavors & Fragrances,Materials,Specialty Chemicals,1958 (1889)
+255,INTU,Intuit,Information Technology,Application Software,1983
+256,ISRG,Intuitive Surgical,Health Care,Health Care Equipment,1995
+257,IVZ,Invesco,Financials,Asset Management & Custody Banks,1935
+258,IPGP,IPG Photonics,Information Technology,Electronic Manufacturing Services,1990
+259,IQV,IQVIA,Health Care,Life Sciences Tools & Services,1982
+260,IRM,Iron Mountain,Real Estate,Specialized REITs,1951
+261,JKHY,Jack Henry & Associates,Information Technology,Data Processing & Outsourced Services,1976
+262,J,Jacobs Engineering Group,Industrials,Construction & Engineering,1947
+263,JBHT,J. B. Hunt,Industrials,Trucking,1961
+264,SJM,JM Smucker,Consumer Staples,Packaged Foods & Meats,1897
+265,JNJ,Johnson & Johnson,Health Care,Pharmaceuticals,1886
+266,JCI,Johnson Controls,Industrials,Building Products,1885
+267,JPM,JPMorgan Chase,Financials,Diversified Banks,2000 (1799 / 1871)
+268,JNPR,Juniper Networks,Information Technology,Communications Equipment,1996
+269,KSU,Kansas City Southern,Industrials,Railroads,1887
+270,K,Kellogg's,Consumer Staples,Packaged Foods & Meats,1906
+271,KEY,KeyCorp,Financials,Regional Banks,1825
+272,KEYS,Keysight Technologies,Information Technology,Electronic Equipment & Instruments,2014
+273,KMB,Kimberly-Clark,Consumer Staples,Household Products,1872
+274,KIM,Kimco Realty,Real Estate,Retail REITs,1958
+275,KMI,Kinder Morgan,Energy,Oil & Gas Storage & Transportation,1997
+276,KLAC,KLA Corporation,Information Technology,Semiconductor Equipment,1975/1977 (1997)
+277,KHC,Kraft Heinz,Consumer Staples,Packaged Foods & Meats,2015 (1869)
+278,KR,Kroger,Consumer Staples,Food Retail,1883
+279,LHX,L3Harris Technologies,Industrials,Aerospace & Defense,2019 (1895)
+280,LH,LabCorp,Health Care,Health Care Services,1978
+281,LRCX,Lam Research,Information Technology,Semiconductor Equipment,1980
+282,LW,Lamb Weston,Consumer Staples,Packaged Foods & Meats,2016 (1950)
+283,LVS,Las Vegas Sands,Consumer Discretionary,Casinos & Gaming,1988
+284,LEG,Leggett & Platt,Consumer Discretionary,Home Furnishings,1883
+285,LDOS,Leidos,Industrials,Diversified Support Services,1969
+286,LEN,Lennar,Consumer Discretionary,Homebuilding,1954
+287,LLY,Eli Lilly,Health Care,Pharmaceuticals,1876
+288,LNC,Lincoln National,Financials,Multi-line Insurance,1905
+289,LIN,Linde,Materials,Industrial Gases,1879
+290,LYV,Live Nation Entertainment,Communication Services,Movies & Entertainment,2010
+291,LKQ,LKQ Corporation,Consumer Discretionary,Distributors,1998
+292,LMT,Lockheed Martin,Industrials,Aerospace & Defense,1995
+293,L,Loews Corporation,Financials,Multi-line Insurance,1959
+294,LOW,Lowe's,Consumer Discretionary,Home Improvement Retail,1904/1946/1959
+295,LUMN,Lumen Technologies,Communication Services,Alternative Carriers,1983 (1877)
+296,LYB,LyondellBasell,Materials,Specialty Chemicals,2007
+297,MTB,M&T Bank,Financials,Regional Banks,1856
+298,MRO,Marathon Oil,Energy,Oil & Gas Exploration & Production,1887
+299,MPC,Marathon Petroleum,Energy,Oil & Gas Refining & Marketing,2009 (1887)
+300,MKTX,MarketAxess,Financials,Financial Exchanges & Data,2000
+301,MAR,Marriott International,Consumer Discretionary,"Hotels, Resorts & Cruise Lines",1927
+302,MMC,Marsh & McLennan,Financials,Insurance Brokers,1905
+303,MLM,Martin Marietta Materials,Materials,Construction Materials,1993
+304,MAS,Masco,Industrials,Building Products,1929
+305,MA,Mastercard,Information Technology,Data Processing & Outsourced Services,1966
+306,MTCH,Match Group,Communication Services,Interactive Media & Services,1986
+307,MKC,McCormick & Company,Consumer Staples,Packaged Foods & Meats,1889
+308,MCD,McDonald's,Consumer Discretionary,Restaurants,1940
+309,MCK,McKesson Corporation,Health Care,Health Care Distributors,1833
+310,MDT,Medtronic,Health Care,Health Care Equipment,1949
+311,MRK,Merck,Health Care,Pharmaceuticals,1891
+312,FB,Meta Platforms,Communication Services,Interactive Media & Services,2004
 313,MET,MetLife,Financials,Life & Health Insurance,1868
 314,MTD,Mettler Toledo,Health Care,Life Sciences Tools & Services,1945
 315,MGM,MGM Resorts International,Consumer Discretionary,Casinos & Gaming,1986
