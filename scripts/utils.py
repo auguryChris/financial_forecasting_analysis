@@ -18,6 +18,7 @@ from statsmodels.graphics.tsaplots import plot_acf
 from pmdarima.arima import auto_arima
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.exceptions import ConvergenceWarning
+from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 #%%
 
@@ -465,6 +466,9 @@ class Strategy:
 
         res = self.calculate_results(forecasts, y_test, 'predicted_mean', 'target', model='AR')
 
+        forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
+        forecasts.index = idx
+
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
 
         return forecasts, res
@@ -564,8 +568,9 @@ class Strategy:
         y_train.set_index('reportperiod', inplace=True, drop=True)
 
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
+        forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
+        forecasts.index = idx
 
-#        res = y_train
         return forecasts, res, best_order
 
 
@@ -606,6 +611,8 @@ class Strategy:
         res = self.calculate_results(forecasts, y_test, 'predicted_mean', 'target', model='Linear Regression')
 
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
+        forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
+        forecasts.index = idx
 
         return forecasts, res
 
@@ -659,17 +666,19 @@ class Strategy:
 
         res = self.calculate_results(forecasts, y_test, 'predicted_mean', 'target', model='Random Forest Regressor')
 
+        forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
+        forecasts.index = idx
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
 
         return forecasts, res
 
 
-#x = DataSplit('MSFT', original_target_name='High',num_forecasts='all')
-#x = Strategy('MSFT',original_target_name='High',num_forecasts='all')
-#t = x.ticker
-#x.dickey_fuller_test()
-#x.acf_pacf_plots()
-#forecasts = x.rf_reg_forecasts
-#res2 = x.rf_reg_results
+##x = DataSplit('MSFT', original_target_name='High',num_forecasts='all')
+x = Strategy('MSFT',original_target_name='High',num_forecasts='all')
+##t = x.ticker
+##x.dickey_fuller_test()
+##x.acf_pacf_plots()
+forecasts = x.rf_reg_forecasts
+res2 = x.rf_reg_results
 
 
