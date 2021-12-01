@@ -19,12 +19,14 @@ class TickerXGBRegressor:
 
     def __init__(self, data):
         self.df = data
+        self.original_dataset = data
 
     # HELPER for predict()
     def create_prediction_df(self, df, target, timeframe, not_feature_list, normilization_type):
         """
         Create normalized target for OHLCV data, get tech indicators, prepare for prediction
         """
+        self.original_dataset = self.original_dataset.shift(timeframe)
         self.original_target_name = target
         target_name = target + \
             str(timeframe) + '_' + \
@@ -136,7 +138,7 @@ class TickerXGBRegressor:
         plt.legend()
         plt.show()
 
-    def predict_with_xgb(self, target='close', timeframe=-1, not_feature_list=['timestamp'],
+    def predict_with_xgb(self, target='close', timeframe=-1, not_feature_list=['timestamp', 'ticker'],
                          normilization_type='return', gsearch_params={'max_depth': [3], 'learning_rate': [0.01], 'colsample_bytree': [1],
                                                                                'n_estimators': [500], 'objective': ['reg:squarederror']},
                          get_importances=True, test_size=0.2, scale_type=None):
@@ -253,6 +255,13 @@ class TickerXGBRegressor:
             self.holdout_metrics['mape'] = mean_absolute_percentage_error(self.holdout_true_y, self.holdout_prediction) * 100
             self.holdout_metrics['rmse'] = mean_squared_error(self.holdout_true_y, self.holdout_prediction, squared=False)
             print(f'Final Holdout Error metrics saved: R^2: {round(self.holdout_metrics["r2_normalized"],4)}. MAPE Unnormalized:{round(self.holdout_metrics["mape"],4)}%')
+
+            # Adding predictions to original dataframe
+            self.prediction.name = 'validation_preds'
+            self.holdout_prediction.name = 'holdout_preds'
+            self.original_dataset = self.original_dataset.join(self.prediction)
+            self.original_dataset = self.original_dataset.join(self.holdout_prediction)
+
 
             # Tree SHAP feature importance generation
             def get_shap_importances(xgb_regressor):
