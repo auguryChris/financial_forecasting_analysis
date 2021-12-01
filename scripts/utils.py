@@ -389,12 +389,7 @@ class Strategy:
         return results
 
 
-#    def eliminate_trend():
-#        pass
-#
-#
-#
-#
+
     ###########################################################################
     ############################### ALGORITHMS ################################
     ###########################################################################
@@ -467,7 +462,13 @@ class Strategy:
         res = self.calculate_results(forecasts, y_test, 'predicted_mean', 'target', model='AR')
 
         forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
-        forecasts.index = idx
+        forecasts.rename("predicted_high", inplace=True)
+#        forecasts.index = idx
+#        forecasts = forecasts.to_frame()
+#        forecasts['reportperiod'] = idx
+#        forecasts.set_index('reportperiod', inplace=True)
+#        forecasts = forecasts.join(self.data.X_test[['High','Close']])
+#        forecasts.rename(columns={0 : 'predicted_high'}, inplace=True)
 
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
 
@@ -533,9 +534,11 @@ class Strategy:
 
         # Get optimal ARIMA model params
         best_order = model_autoARIMA.get_params().get('order')
+        best_seasonal_order = model_autoARIMA.get_params().get('seasonal_order')
 
         # Re-run model with optimal params
-        model = ARIMA(y_train, order=best_order)
+#        model = ARIMA(y_train, order=best_order)
+        model = SARIMAX(y_train, order=best_order, seasonal_order=best_seasonal_order) # Recommended optimization model: SARIMAX
         model_fit = model.fit()
 #        print(model_fit.summary())
 
@@ -569,7 +572,13 @@ class Strategy:
 
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
         forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
-        forecasts.index = idx
+        forecasts.rename("predicted_high", inplace=True)
+#        forecasts.index = idx
+#        forecasts = forecasts.to_frame()
+#        forecasts['reportperiod'] = idx
+#        forecasts.set_index('reportperiod', inplace=True)
+#        forecasts = forecasts.join(self.data.X_test[['High','Close']])
+#        forecasts.rename(columns={0 : 'predicted_high'}, inplace=True)
 
         return forecasts, res, best_order
 
@@ -612,7 +621,13 @@ class Strategy:
 
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
         forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
-        forecasts.index = idx
+        forecasts.rename("predicted_high", inplace=True)
+#        forecasts.index = idx
+#        forecasts = forecasts.to_frame()
+#        forecasts['reportperiod'] = idx
+#        forecasts.set_index('reportperiod', inplace=True)
+#        forecasts = forecasts.join(self.data.X_test[['High','Close']])
+#        forecasts.rename(columns={0 : 'predicted_high'}, inplace=True)
 
         return forecasts, res
 
@@ -667,7 +682,14 @@ class Strategy:
         res = self.calculate_results(forecasts, y_test, 'predicted_mean', 'target', model='Random Forest Regressor')
 
         forecasts = self.unnormalize_target(forecasts, target_name='predicted_mean', normalization_type='log_return')
-        forecasts.index = idx
+        forecasts.rename("predicted_high", inplace=True)
+#        forecasts.index = idx
+#        forecasts = forecasts.to_frame()
+#        forecasts['reportperiod'] = idx
+#        forecasts.set_index('reportperiod', inplace=True)
+#        forecasts = forecasts.join(self.data.X_test[['High','Close']])
+#        forecasts.rename(columns={0 : 'predicted_high'}, inplace=True)
+
 #        self.plot_res(forecasts['predicted_mean'], y_test['target'], y_train['target'])
 
         return forecasts, res
@@ -675,10 +697,12 @@ class Strategy:
 
 ##x = DataSplit('MSFT', original_target_name='High',num_forecasts='all')
 x = Strategy('MSFT',original_target_name='High',num_forecasts='all')
+
 ##t = x.ticker
 ##x.dickey_fuller_test()
 ##x.acf_pacf_plots()
-forecasts = x.rf_reg_forecasts
-res2 = x.rf_reg_results
+forecasts = x.linreg_forecasts
+res2 = x.linreg_results
+#params = x.arima_best_params
 
 
