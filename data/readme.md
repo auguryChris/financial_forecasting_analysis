@@ -1,9 +1,10 @@
-Intro to remote data storage
+data/Intro to remote data storage
 
 Tutorial is here: https://dvc.org/doc/start/data-and-model-versioning
 data
 
-0. Make sure you have the config.local file in your .dvc folder. (email)
+0. Make sure you have the config.local file in your .dvc folder. (email) 
+00. Make sure you have dvc installed locally https://dvc.org/doc/install
 In command line (terminal) do the following: 
 Open a terminal window
 1. cd youprojectdirecty/.git/
