@@ -19,12 +19,14 @@ class TickerXGBRegressor:
 
     def __init__(self, data):
         self.df = data
+        self.original_dataset = data
 
     # HELPER for predict()
     def create_prediction_df(self, df, target, timeframe, not_feature_list, normilization_type):
         """
         Create normalized target for OHLCV data, get tech indicators, prepare for prediction
         """
+        self.original_dataset = self.original_dataset.shift(timeframe)
         self.original_target_name = target
         target_name = target + \
             str(timeframe) + '_' + \
@@ -120,23 +122,23 @@ class TickerXGBRegressor:
 
         y_hat = predictions
         y_test = actual
-        #residuals = y_test - y_hat
+        residuals = y_test - y_hat
         rolling_window=7
         
         y_hat_rolling = pd.DataFrame(y_hat).rolling(rolling_window).mean()
         y_test_rolling = pd.DataFrame(y_test).rolling(rolling_window).mean()
         n = range(len(y_hat_rolling))
         plt.figure(figsize=(15, 6))
-        plt.plot(n, y_test_rolling.iloc[:,0], 
+        plt.plot(n, y_test_rolling, 
                  color='red', label='y_test', alpha=0.5)
-        plt.plot(y_hat_rolling.iloc[:,0],
+        plt.plot(y_hat_rolling,
                  color='black', label='y_pred', alpha=0.8)
         plt.plot(np.mean(y_train)*np.ones((len(n),)),
                  color='blue', label='Training Mean', alpha=0.5)
         plt.legend()
         plt.show()
 
-    def predict_with_xgb(self, target='close', timeframe=-1, not_feature_list=['timestamp'],
+    def predict_with_xgb(self, target='close', timeframe=-1, not_feature_list=['timestamp', 'ticker'],
                          normilization_type='return', gsearch_params={'max_depth': [3], 'learning_rate': [0.01], 'colsample_bytree': [1],
                                                                                'n_estimators': [500], 'objective': ['reg:squarederror']},
                          get_importances=True, test_size=0.2, scale_type=None):
@@ -151,41 +153,24 @@ class TickerXGBRegressor:
         self.timeframe = timeframe
         pred_df, features, target_name = self.create_prediction_df(df, target, timeframe,
                                                                    not_feature_list, normilization_type)
-        # # SCALING
-        # if scale_type=='minmax':
-        #     scaler = MinMaxScaler()
-        #     pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
-        #     self.scaler_dict = {scale_type: scaler}
-        # elif scale_type=='standard':
-        #     scaler = StandardScaler()
-        #     pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
-        #     self.scaler_dict = {scale_type: scaler}
-        # else:
-        #     self.scaler_dict = None
-        
-        # Train-Test Split
-        X_train, X_test, y_train, y_test = train_test_split(
-            pred_df[features], pred_df[target_name], test_size=test_size, shuffle=False)
-        # Test-Holdout Split (50-50)
-        X_test, X_hold, y_test, y_hold = train_test_split(
-            X_test, y_test, test_size=0.50, shuffle=False)
-        
         # SCALING
         if scale_type=='minmax':
             scaler = MinMaxScaler()
+            pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
             self.scaler_dict = {scale_type: scaler}
         elif scale_type=='standard':
             scaler = StandardScaler()
+            pred_df[target_name] = scaler.fit_transform(pred_df[target_name].copy().values.reshape(-1, 1))
             self.scaler_dict = {scale_type: scaler}
         else:
             self.scaler_dict = None
         
-        if self.scaler_dict != None:
-            y_train = pd.Series(scaler.fit_transform(y_train.copy().values.reshape(-1, 1)).reshape(-1,), index=y_train.index)
-            y_test = pd.Series(scaler.transform(y_test.copy().values.reshape(-1, 1)).reshape(-1,), index=y_test.index)
-            y_hold = pd.Series(scaler.transform(y_hold.copy().values.reshape(-1, 1)).reshape(-1,), index=y_hold.index)
-            
-
+        # Train-Test Split
+        X_train, X_test, y_train, y_test = train_test_split(
+            pred_df[features], pred_df[target_name], test_size=test_size, shuffle=False)
+        # Test-Holdout Split
+        X_test, X_hold, y_test, y_hold = train_test_split(
+            X_test, y_test, test_size=0.50, shuffle=False)
         
         # Grid Search, Scores, Plotting Actual vs Predictions
         param_grid = ParameterGrid(gsearch_params)
@@ -253,6 +238,13 @@ class TickerXGBRegressor:
             self.holdout_metrics['mape'] = mean_absolute_percentage_error(self.holdout_true_y, self.holdout_prediction) * 100
             self.holdout_metrics['rmse'] = mean_squared_error(self.holdout_true_y, self.holdout_prediction, squared=False)
             print(f'Final Holdout Error metrics saved: R^2: {round(self.holdout_metrics["r2_normalized"],4)}. MAPE Unnormalized:{round(self.holdout_metrics["mape"],4)}%')
+
+            # Adding predictions to original dataframe
+            self.prediction.name = 'validation_preds'
+            self.holdout_prediction.name = 'holdout_preds'
+            self.original_dataset = self.original_dataset.join(self.prediction)
+            self.original_dataset = self.original_dataset.join(self.holdout_prediction)
+
 
             # Tree SHAP feature importance generation
             def get_shap_importances(xgb_regressor):
