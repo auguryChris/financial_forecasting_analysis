@@ -5,3 +5,11 @@
 # in any depth use ** before DirectoryA
 **/SCUT-FBP5500_V2/
 
+notebooks/.ipynb_checkpoints/xgboost_regression_LOW-checkpoint.ipynb
+notebooks/.ipynb_checkpoints/backtesting_backtrader-checkpoint.ipynb
+notebooks/.ipynb_checkpoints/backtesting_backtrader-RandomForestRegression-checkpoint.ipynb
+notebooks/.ipynb_checkpoints/tuned_model_predictions_xgb-checkpoint.ipynb
+scripts/__pycache__/xgboost_for_tickers.cpython-36.pyc
+scripts/__pycache__/xgboost_for_tickers.cpython-36.pyc
+scripts/__pycache__/xgboost_for_tickers.cpython-36.pyc
+scripts/__pycache__/xgboost_for_tickers.cpython-36.pyc
