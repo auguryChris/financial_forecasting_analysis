@@ -1,6 +1,0 @@
-pandas>=1.2.3
-sys==3.7.4
-Quandl==3.5.2
-yfinance==0.1.64
-pandas-datareader==0.10.0
-pickle==4.0
