@@ -8,7 +8,7 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 
 <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/data/SAMPLE_DATA_MSFT.csv">Sample Data for 1 Stock including All Funamental and Technical Features</a>
 
-<a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/requirements.txt">Module Requirements Are Here</a>
+<a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/requirements.txt">Module Requirements to Run All Scripts and Notebooks</a>
 
 ## Notebooks & Scripts : Referenced in the Report
 
