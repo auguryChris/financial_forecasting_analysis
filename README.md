@@ -1,4 +1,4 @@
-# What is The Best ML/AI model and Features for Financial Time Series Forecasting?
+# Financial Forecasting and Backtesting with Machine Learning
 ### An empirical survey of financial time series forecasting techniques using S&P 500 data
 By Allie Bergman, Armand Khachatourian, Chris Westendorf
 ## Abstract
