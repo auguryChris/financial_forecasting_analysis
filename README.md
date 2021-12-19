@@ -17,7 +17,7 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 ### 3.2 Feature Engineering
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Technical Feature Engineering</a>
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Signal Processing: Decomposition Features</a>
-
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/data/SAMPLE_DATA_MSFT.csv">Sample Data for 1 Stock with All Features</a>
 ### 3.3 Feature Importance & Dimensionality Reduction
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost/tuned_model_predictions_xgb.ipynb">Shapley Additive Explanation values for tree ensembles</a>
 ### 3.4 Unsupervised Learning Stock Picks
