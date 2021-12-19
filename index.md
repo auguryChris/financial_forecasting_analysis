@@ -38,7 +38,6 @@ Having trouble with Pages? Check out our [documentation](https://docs.github.com
 
 
 
-<div>
 Table of Contents
 1. Introduction
 1.1 Background
