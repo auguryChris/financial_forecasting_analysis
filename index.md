@@ -1,12 +1,3 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/auguryChris/financial_forecasting_analysis/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown
 Syntax highlighted code block
@@ -24,36 +15,34 @@ Syntax highlighted code block
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/auguryChris/financial_forecasting_analysis/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
 
 
-
-Table of Contents
-1. Introduction
-1.1 Background
-1.2 Audience & Motivation
-2. Data Acquisition
-2.1 Data Sources
-3. Methodology
-3.1 Data Cleaning / Splitting
-3.2 Feature Engineering
-3.3 Scaling
-3.4 Forecasting Models
-4. Results & Discussion
-4.1 Forecasting Numerical Results
-4.2 Back Testing Results
-4.3 Discussion & Failure Analysis
-5. Conclusion & Future Direction
+## Table of Contents
+<ol type="1">
+<li>Introduction
+    <ul>
+        <li>1.1 Background </li>
+        <li>1.2 Audience & Motivation </li>
+    </ul>
+<li>Data Acquisition</li>
+    <ul>
+       <li>2.1 Data Sources</li>
+    </ul>
+<li>Methodology</li>
+    <ul>
+        <li>3.1 Data Cleaning / Splitting</li>
+        <li>3.2 Feature Engineering</li>
+        <li>3.3 Scaling</li>
+        <li>3.4 Forecasting Models</li>
+    </ul>
+<li>Results & Discussion</li>
+    <ul>
+        <li>4.1 Forecasting Numerical Results</li>
+        <li>4.2 Back Testing Results</li>
+        <li>4.3 Discussion & Failure Analysis</li>
+    </ul>
+<li>Conclusion & Future Direction</li>
+</ol>
     
 ## 1. Introduction
 ### 1.1.Background
@@ -228,9 +217,94 @@ The .auto_arima() model determined that SARIMAX, a Seasonal ARIMA model with “
 
 As previously mentioned, more recent models try to focus on learning the behavior of a series from its data, without prior explicit assumptions, such as linearity or stationarity. An ideal approach is to divide the tough task of forecasting the original time series into several subtasks, and each of them forecasts a relatively simpler subsequence. And then the results of all subtasks are accumulated as the final result. Based on this idea, a decomposition and ensemble framework was proposed and applied to the analysis of our time series. This framework consists of three stages. 
 
-1. In the first stage, the original time series was decomposed into several components. Here we used Complete Ensemble Empirical Mode Decomposition with Adaptive Noise ( CEEMDAN) [PyEMD public package from Dawid Laszuk](github.com/laszukdawid/PyEMD). 
-2. In the second stage, some statistical or AI-based methodologies are applied to forecast each decomposed component individually. After exploring many LSTM Deep Neural Network ensembles to find the best performance we selected an architecture proposed by Renan de Luca Avila and Glauber De Bona for our final benchmarking. 
+<ol type="1">
+    <li>In the first stage, the original time series was decomposed into several components. Here we used Complete Ensemble Empirical Mode Decomposition with Adaptive Noise ( CEEMDAN) [PyEMD public package from Dawid Laszuk](github.com/laszukdawid/PyEMD). </li>
+    <li>In the second stage, some statistical or AI-based methodologies are applied to forecast each decomposed component individually. After exploring many LSTM Deep Neural Network ensembles to find the best performance we selected an architecture proposed by Renan de Luca Avila and Glauber De Bona for our final benchmarking.</li>
+    <ol>
+        <li>Considering our 5 distinct features (Open, High, Low, Volume, Close) and that CEEMDAN generates around 7 to 9 components for our original series length, we have roughly 40 series to deal with. This implies a significantly larger training time, decreasing the chances for the neural model to converge properly. Nevertheless, long trend intrinsic mode functions are smooth, so the use of simpler and faster methods should result in less errors in the prediction results. A simpler prediction method can prevent errors caused by neural convergence difficulties which, in turn, can be caused by the multiple feature input. Thus, some of the high frequency IMFs, which have more complexity in the time frequency, can be predicted with the neural model while the other ones are left for a simpler prediction method. Cubic splines were a natural candidate, as they are employed in the EMD method to generate the envelopes. Thus, we apply cubic splines to predict low frequency IMFs, expecting to benefit both from the neural model’s capacity of learning complex patterns in high frequency data and from the spline’s stability when it comes to low frequency IMFs.</li>
+        <li>We couple together the IMFs of the same level for different features to create exogenous inputs for our LSTM</li>
+        <li>For each of the IMF series resulting from the CEEMDAN decomposition, a series of windows of sequential values is generated. An IMF series of length n yields a series with n − Δt + 1 windows, where Δt is the window length, and this series of windows is used as input. For example, if the original series is [1, 2, 3, 4, 5, 6, 7] and the window size is 3, the resulting series of windows will be [[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7]].
+</li>
+        <li>The window length Δt is treated as a hyperparameter and is adjusted according to each series relative frequency. That is, low frequency series have time windows of greater length and high frequency series have lesser window length. The input tensor for the neural network is bidimensional of size m · Δt, where m is the number of input features.</li>
+    </ol>
+    <li>In the last stage, the predicted results from all components are aggregated as the final results and then denormalized into the original prediction space by multiplying the IMF with the previous day’s Close.</li>
+</ol>
+<p align="center"><img src="images/LSTM_Architecture_Diagram.png" alt='LSTM_Architecture_Diagram' height='350'><img src="images/LSTM_Feature_diagram.png" alt='LSTM_Architecture_Diagram' height='350'><br>(Left ) is the diagram for our LSTM architecture; (Right) is the generalized ensemble yielding the best results </p>
 
-
+## 4. Discussion & Results
 
 <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/1.embed"></iframe>
+
+### 4.1 Numeric Accuracy Results
+
+The error metrics were calculated over the test dataset after inverse transforming the target back into predicted next-day high. These predictions were scored on Root Mean Squared Error (RMSE) to indicate absolute error, and Mean Absolute Percentage Error (MAPE) to indicate magnitude of error.
+
+# INSERT CHART
+
+**XGBOOST**
+
+Overall, the XGBoost results using all of the features did not perform as well as the other models (aside from linear regression) across all stocks. This can be partly attributed to the fact that a significant amount of the fundamental features added noise rather than signal to the model. Leveraging the reduced dataset, a simpler random forest model was able to achieve better results on the test data.
+
+**AR**
+
+We decided to leverage MAPE as the main metric to look at to determine success, because its relative nature creates translatability across all stocks and timeframes where nominal price accrual over 20 years can be significant. As you can see, the MAPE for AR is hovering around the 1% value for nearly all of the securities, indicating a strong ability to predict the next day’s high price.
+
+
+**ARIMA**
+
+The results for ARIMA are extremely similar to the results for AR, which we would expect, considering they are very interconnected. As a reminder, we decided to leverage MAPE as the main metric to look at to determine success, because its relative nature creates translatability across all stocks and timeframes where nominal price accrual over 20 years can be significant. Much like we saw in AR, unsurprisingly, MAPE for ARIMA is hovering around the 1% value for nearly all of the securities, indicating a strong ability to predict the next day’s high price.
+
+**Linear Regression**
+
+Since we are determining results off of MAPE, we can see a significant increase over the AR and ARIMA models. Additionally, the other error metrics are materially higher than in the previous two models, except for XOM. Given that MAPE is now ranging between 1.8% and 3.6%, we are looking at greater variance in success between securities when using Linear Regression as our predictive model.
+
+**Random Forest**
+
+The results for Random Forest on the test set are actually the best, if not tied for, on every stock. This is true for both RMSE and MAPE. For this model, we were leveraging the reduced dataset, and like the XGBoost, the simpler model seems to be able to achieve better results on the test data. 
+
+**LSTM Ensemble**
+
+It is worth noting that this model often was the second most numerically accurate model. And this is worth nothing because it is the only model that did not use the 50 features the other models used. Instead this model was able to infer comparable signal information through frequency decomposition. We found this fascinating given all the focused effort that traditionally goes into financial time-series feature engineering.
+
+### 4.2 Backtesting Results
+
+Backtesting is the general method for seeing how well a strategy or model would have done ex-post. Backtesting assesses the viability of a trading strategy by discovering how it would play out using historical data. If backtesting works, traders and analysts may have the confidence to employ it going forward. Backtesting was performed on the test data only in order to keep the results similar to a live trading period. 
+
+**Set Up**
+
+The backtesting period data was never used for training or tuning the models. In order to highlight the results of the machine learning models, we designed a very basic trading strategy. The logic of the strategy is to input a sell order for the next-day predicted high if the prediction is higher than the current price. If currently not in a position, buy at the next market open. There is one order placed per day. If there are no positions in the current portfolio, place a market buy for the next day to obtain a position in the market. Since our prediction target is the next-day high, we place sell orders at the predicted high, which will execute on the following day if the price ever reaches the predicted high. If the predicted high is more than the current price at the time of observation, place a market sell order for the following day to exit the position quickly. If the sell orders do not execute on any given day, cancel the current sell order and use the current next-day high prediction as the new sell order. 
+
+**Results**
+
+This backtest is over 544 trading days, with $100,000 as the starting cash. Buy and hold for each stock in our portfolio averaged ~77% overall over the entire period, whereas the XGBoost high-selling strategy averaged ~96% for the same stocks and time period. This means that our starting cash at the end of the period with the XGBoost strategy was $196k vs $177k for buy and hold. The sharpe ratio reported here is average monthly sharpe with 0% risk-free rate, meaning that we simply take the return of a 1-month period (including any weekends and holidays) and normalize by the 1-month standard deviation of that same period. Max drawdown is the maximum observed loss from a peak to a trough of a portfolio, which is expressed in terms of percentages. Maximum loss for buy and hold was ~38% over the trading period, whereas XGBoost strategy was only ~27%. 
+
+# Insert Charts
+
+## 4.3 Results Discussion
+
+Although the XGBoost and Linear Regression models achieved the worst loss scores of all models, they performed the best in the backtest. The reason for this surprising result is due to the fact that the trading strategy logic is not optimized to take full advantage of numerical accuracy of predictions. For example, after an analysis of the predictions for each model, we saw that the XGBoost, Random Forest, and Linear Regression models tend to often overestimate the next-day high, whereas the other models underestimate the next-day high. The result is that the underestimated prediction sell orders will always execute, whereas the XGBoost and Linear Regression strategies will often hold the position for longer since their predictions are frequently larger than the true target value. As a result, the XGBoost strategy was able to take advantage of the benefits of holding the position, while only executing sell orders at relatively high prices. 
+
+With that said, there are certainly many ways to improve this baseline trading strategy. For example, we can have smarter entry points. Currently, buy orders are being executed at market price at the open, which means we get in position as soon as possible when not in a position. Returns may increase if entry constraints are increased. Another idea is to resize orders. Orders for this strategy baseline are currently 100% in or 100% out of position. This has benefits if you want less exposure to the long term movement of the stocks. Depending on the situation and strategy, we might want to reserve a cash position to expose ourselves less to short term movements. Additionally, we can include more stocks in our portfolio to decrease exposure and return variance even further. Finally, we can incorporate model ensembling into our trading strategies. Models with similar loss metrics on the test data and good performances on the backtest can be ensembled to create better predictions. A combination of these ideas can be employed to ensure that we are leveraging the numerical accuracy of the predictions effectively.
+
+## 5. Conclusion
+Approaches to stock selection and feature space designing are limitless. Here the motivation was not to have the best answer to these challenges because that does not exist. All models are wrong at the end of the day but some of them are more useful than others. So instead, our motivation was to be able to inform readers on the nuanced trade-offs and impact that decisions about feature engineering, signal processing, model complexity, model interpretability have on numerical accuracy and the resulting forecast's potential to create value. In summary, we empirically observed that there isn’t a wildly significant numerical difference when predicting the next day high. For basic trading strategies, similar to what we’ve employed for this analysis, simple models work reasonably well. 
+
+Feature engineering is certainly a notable caveat as there are endless ways to design a ticker’s feature space. It is worth underlining the scaling challenge of working with stock features.  In decision tree models, scaling of features is not necessary. In terms of feature space, it is worth reiterating that a majority of the most important, informative, features were long term features that have a moving window of 200 days. This is worth noting because it is critical to identify regime switches when forecasting stocks. 
+
+However, complex model decision making typically translates to longer training time and its computational costs. For instance it took roughly 1 minute per year of data per IMF per stock to train our LSTM networks. So 18 years * 11 IMFs * 6 technicals equates to 1188 minutes. That said, we noticed that the LSTM’s did quite well when only leveraging a few years and did not necessarily need all 18 years of data. Training on a single year of data, one could assemble our ensemble and predict results in about 20 minutes. Random Forests also take a considerable amount of time to train, whereas XGBoosted Decision Trees afford parallelization which can considerably speed up training. The trade off here could be decided based on the need for model interpretability. Random Forests were observed to be the most numerically accurate and afforded the best feature importance translation. 
+
+**Possible Next Steps**
+
+Time frame is always critical when forecasting. Therefore a practical extension of this work would be to extend the prediction windows far beyond a single day. While linear regression may be more than enough to predict the next day it may not have as much accuracy 3, 5,10, 30 days out.
+
+Furthermore, extensions of this project could be expanding the research out to more of the S&P 500. We limited our “portfolio” to six stocks that we decided had unique trading patterns, sectors/industries, or other general features about them. With the diversity, this lends itself well to the follow up question of: “What other stocks trade like this?” 
+
+With ~500 to choose from, we can very likely continue on to do some clustering by model success. This would allow us in practice to generate different portfolios centered around similar strategies. For example, you could have the XGBoost Strategy, containing all of the stocks that consistently perform better under an XGBoost prediction model. From there, we can do more analysis with overlays to determine traits about the underlying stocks, such as whether they are all in a similar sector, have certain statistical traits that can be exploited, and so on. For example, if we were to find that ARIMA performs well on a high number of value stocks, we could add an additional filtering layer to the ARIMA strategy that selects some of the most promising value stocks based on value investing criteria.  This will allow us to maximize model efficiency when it comes to practical applications, reduce opportunity costs, and improve the sharpe ratio of our portfolios.
+
+Additionally, there are limitless combinations of possible feature sets (particularly in the technical indicator space), and many different models and model parameters we could expand this to. We limited ourselves to S&P 500 daily data, but on a more granular level (secondly, minutely, hourly, etc.) data, or expanded over a wider swath of possible stocks, we may be able to achieve better results. We can also expand this into cryptocurrency, which would require a deeper dive into the target variable, since crypto markets have no close, and metrics like “high” are typically on a trailing 24-hour basis. It would require a more thorough look at the effects of daily vs more granular, higher frequency data, and how to adapt the code to read it. The increased frequency of the data may also lead to drastically different model success than daily data. All that said, the constant trading, if successful, may yield better returns over time than basic equity securities.
+
+
+## Contributions to the Project:
+**Allie Bergman:** Linear Models & Random Forest, Data Gathering, Feature Engineering, Reporting
+**Armand Khachatourian:** XGBoost & Feature Importance, Feature Engineering, Backtesting, Reporting
+**Chris Westendorf:**: Unsupervised Learning & Stock Selection, LSTM Ensembles, Reporting
