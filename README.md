@@ -15,7 +15,7 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 ### 2.Data Acquisition
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/data_retrieval.py">Data Retrieval</a>
 ### 3.2 Feature Engineering
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">63 combined price features</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Technical Feature Engineering</a>
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Signal Processing: Decomposition Features</a>
 
 ### 3.3 Feature Importance & Dimensionality Reduction
