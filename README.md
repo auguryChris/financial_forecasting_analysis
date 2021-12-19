@@ -29,4 +29,4 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/02_DNN">LSTM Models</a>
 
 ### 4.2 Backtesting Results
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/Backtesting">Backtests</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/Backtesting">Backtests with full trading logs</a>
