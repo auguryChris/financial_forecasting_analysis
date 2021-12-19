@@ -6,20 +6,21 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 
 ## <a href="#">Link to paper</a>
 
-<a href="#">Dataset Sample:</a> We used 104 fundamental indicators along with the 5 standard price indicators for 20 years of the S&P 500
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/data/SAMPLE_DATA_MSFT.csv">Sample Data for 1 Stock including All Funamental and Technical Features</a>
 
-<a href="#">Module Requirements Are Here</a>
+<a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/requirements.txt">Module Requirements Are Here</a>
 
 ## Notebooks & Scripts : Referenced in the Report
 
 ### 2.Data Acquisition
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/data_retrieval.py">Data Retrieval</a>
+
 ### 3.2 Feature Engineering
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Technical Feature Engineering</a>
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Signal Processing: Decomposition Features</a>
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/data/SAMPLE_DATA_MSFT.csv">Sample Data for 1 Stock with All Features</a>
+
 ### 3.3 Feature Importance & Dimensionality Reduction
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost/tuned_model_predictions_xgb.ipynb">Shapley Additive Explanation Values for Tree Ensembles</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost/xgboost_final_tuned.ipynb">Shapley Additive Explanation Values for Tree Ensembles</a>
 ### 3.4 Unsupervised Learning Stock Picks
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/00_Decomposition_4_Clustering/00_120d_CEEMDAN.ipynb">Clustering Stocks</a>
 
