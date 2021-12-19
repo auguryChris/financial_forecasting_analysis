@@ -75,12 +75,12 @@ In order to create additional features on top of our core pricing and fundamenta
 ***Relative Strength Index (RSI) momentum indicator***
 
 Relative Strength Index is a momentum indicator that tracks the magnitude of recent price changes. The recency component, as well as the ability to include magnitude, means the indicator can evaluate overbought/oversold conditions quickly, despite being a lagging indicator. The indicator is an oscillator (ranges between two values) and often has cutoffs at 80% (overbought) and 20% (oversold), though you may find these as a 70/30 split as well. Our combination list iterated over the lookback period length.
-(More information: [https://www.investopedia.com/terms/r/rsi.asp] )
+(More information: [https://www.investopedia.com/terms/r/rsi.asp](https://www.investopedia.com/terms/r/rsi.asp) )
     
 ***MACD trend-following momentum indicator***
     
 MACD (Moving Average Convergence Divergence) is a lagging trend-following momentum indicator. This indicator leverages two different moving averages for a ticker’s price, where one is slower and one is faster, and the difference is taken between the two to determine the MACD line. There is also a signal line, typically faster than the faster of the moving averages, which acts as an indicator for buys and sells. When the MACD line passes above the signal line, the security is considered a Buy. Our combination list iterated over the short and long lookback period lengths,  where the faster is less than the slower length. Our feature metric is the difference between these two, for some normalization around 0.
-(More information: [https://www.investopedia.com/terms/m/macd.asp] )
+(More information: [https://www.investopedia.com/terms/m/macd.asp](https://www.investopedia.com/terms/m/macd.asp) )
     
 ***Bollinger Bands (BB) volatility indicator***
     
@@ -305,6 +305,6 @@ Additionally, there are limitless combinations of possible feature sets (particu
 
 
 ### Contributions to the Project:
--**Allie Bergman:** Linear Models & Random Forest, Data Gathering, Feature Engineering, Reporting
--**Armand Khachatourian:** XGBoost & Feature Importance, Feature Engineering, Backtesting, Reporting
--**Chris Westendorf:**: Unsupervised Learning & Stock Selection, Feature Engineering, LSTM Ensembles, Reporting
+- **Allie Bergman:** Linear Models & Random Forest, Data Gathering, Feature Engineering, Reporting
+- **Armand Khachatourian:** XGBoost & Feature Importance, Feature Engineering, Backtesting, Reporting
+- **Chris Westendorf:** Unsupervised Learning & Stock Selection, Feature Engineering, LSTM Ensembles, Reporting
