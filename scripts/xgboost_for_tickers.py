@@ -239,9 +239,9 @@ class TickerXGBRegressor:
                                                      normilization_type=normilization_type)
             self.holdout_true_y = self.unnormilze_target(holdout_true_y_df, target_name=target_name, timeframe=timeframe,
                                                  normilization_type=normilization_type)
-            self.holdout_metrics['mae'] = mean_absolute_error(self.holdout_true_y, self.holdout_prediction)
-            self.holdout_metrics['mape'] = mean_absolute_percentage_error(self.holdout_true_y, self.holdout_prediction) * 100
-            self.holdout_metrics['rmse'] = mean_squared_error(self.holdout_true_y, self.holdout_prediction, squared=False)
+            self.holdout_metrics['mae'] = mean_absolute_error(self.holdout_true_y[1:], self.holdout_prediction[:-1])
+            self.holdout_metrics['mape'] = mean_absolute_percentage_error(self.holdout_true_y[1:], self.holdout_prediction[:-1]) * 100
+            self.holdout_metrics['rmse'] = mean_squared_error(self.holdout_true_y[1:], self.holdout_prediction[:-1], squared=False)
             print(f'Final Holdout Error metrics saved: R^2: {round(self.holdout_metrics["r2_normalized"],4)}. MAPE Unnormalized:{round(self.holdout_metrics["mape"],4)}%')
 
             # Adding predictions to original dataframe
