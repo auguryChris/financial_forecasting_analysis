@@ -35,3 +35,14 @@ Your Pages site will use the layout and styles from the Jekyll theme you have se
 ### Support or Contact
 
 Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+
+
+
+<div>
+    <a href="https://plotly.com/~augurychris/1/?share_key=cpWvZXGn2fbyrsVmaDa4AM" target="_blank" title="Forecasting Waters Corporation (WAT) Next Day High" style="display: block; text-align: center;"><img src="https://plotly.com/~augurychris/1.png?share_key=cpWvZXGn2fbyrsVmaDa4AM" alt="Forecasting Waters Corporation (WAT) Next Day High" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plotly.com/404.png';" /></a>
+    <script data-plotly="augurychris:1" sharekey-plotly="cpWvZXGn2fbyrsVmaDa4AM" src="https://plotly.com/embed.js" async></script>
+</div>
+
+
+TEST
+<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/1.embed"></iframe>
