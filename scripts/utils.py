@@ -24,7 +24,6 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 
 warnings.filterwarnings('ignore', category=pd.core.common.SettingWithCopyWarning)
 
-#ticker_names = ['MSFT', 'HD', 'UNH', 'XOM', 'ADSK', 'WAT']
 
 class DataSplit:
     """
@@ -201,14 +200,13 @@ class DataSplit:
         return X_train, y_train, X_test, y_test, X_hold, y_hold
 
 
-##%%
-#
-#x = DataSplit('MSFT', original_target_name='High',num_forecasts='all')
-#y_train = x.y_train
-#y_test = x.y_test
-#y_hold = x.y_hold
+note = """
 
-#%%
+The dataset split is noted as "train", "test", and "hold", but in actual
+application those correlate to the "train", "validation", and "test" sets,
+for chonological accuracy.
+
+"""
 
 class Strategy:
 
@@ -395,7 +393,8 @@ class Strategy:
         mae = mean_absolute_error(y_test, forecast)
 #        print(model + ' MAE: ' + str(mae))
 
-        rmse = math.sqrt(mean_squared_error(y_test, forecast))
+#        rmse = math.sqrt(mean_squared_error(y_test, forecast))
+        rmse = mean_squared_error(y_test, forecast, squared=False)
 #        print(model + ' RMSE: ' + str(rmse))
 
         mape = np.mean(np.abs(forecast - y_test)/np.abs(y_test))
