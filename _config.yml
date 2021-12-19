@@ -1,1 +1,4 @@
 theme: jekyll-theme-slate
+google_analytics: 
+title: Financial Forecasting and Backtesting with Machine Learning
+description: An empirical survey of financial time series forecasting techniques using S&P 500 data
