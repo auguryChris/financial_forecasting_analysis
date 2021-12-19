@@ -19,13 +19,13 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/feature_engineering.py">Signal Processing: Decomposition Features</a>
 
 ### 3.3 Feature Importance & Dimensionality Reduction
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost">Shapley Additive Explanation values for tree ensembles</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost/tuned_model_predictions_xgb.ipynb">Shapley Additive Explanation values for tree ensembles</a>
 ### 3.4 Unsupervised Learning Stock Picks
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/00_Decomposition_4_Clustering/00_120d_CEEMDAN.ipynb">Clustering Stocks</a>
 
 ### 3.5 Forecasting Models
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/04_Linear_Models/Linear%20Prediction%20Models.ipynb">Linear Models</a>
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost">XGBoost Models</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/04_Linear_Models/Linear%20Prediction%20Models.ipynb">Linear Models & Random Forest</a>
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/02_DNN">LSTM Models</a>
 
 ### 4.2 Backtesting Results
