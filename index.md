@@ -19,29 +19,29 @@ Syntax highlighted code block
 
 ## Table of Contents
 <ol type="1">
-<li>Introduction
+    <li>Introduction</li>
     <ul>
         <li>1.1 Background </li>
         <li>1.2 Audience & Motivation </li>
     </ul>
-<li>Data Acquisition</li>
+    <li>Data Acquisition</li>
     <ul>
        <li>2.1 Data Sources</li>
     </ul>
-<li>Methodology</li>
+    <li>Methodology</li>
     <ul>
         <li>3.1 Data Cleaning / Splitting</li>
         <li>3.2 Feature Engineering</li>
         <li>3.3 Scaling</li>
         <li>3.4 Forecasting Models</li>
     </ul>
-<li>Results & Discussion</li>
+    <li>Results & Discussion</li>
     <ul>
         <li>4.1 Forecasting Numerical Results</li>
         <li>4.2 Back Testing Results</li>
         <li>4.3 Discussion & Failure Analysis</li>
     </ul>
-<li>Conclusion & Future Direction</li>
+    <li>Conclusion & Future Direction</li>
 </ol>
     
 ## 1. Introduction
