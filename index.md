@@ -304,7 +304,7 @@ With ~500 to choose from, we can very likely continue on to do some clustering b
 Additionally, there are limitless combinations of possible feature sets (particularly in the technical indicator space), and many different models and model parameters we could expand this to. We limited ourselves to S&P 500 daily data, but on a more granular level (secondly, minutely, hourly, etc.) data, or expanded over a wider swath of possible stocks, we may be able to achieve better results. We can also expand this into cryptocurrency, which would require a deeper dive into the target variable, since crypto markets have no close, and metrics like “high” are typically on a trailing 24-hour basis. It would require a more thorough look at the effects of daily vs more granular, higher frequency data, and how to adapt the code to read it. The increased frequency of the data may also lead to drastically different model success than daily data. All that said, the constant trading, if successful, may yield better returns over time than basic equity securities.
 
 
-## Contributions to the Project:
-**Allie Bergman:** Linear Models & Random Forest, Data Gathering, Feature Engineering, Reporting
-**Armand Khachatourian:** XGBoost & Feature Importance, Feature Engineering, Backtesting, Reporting
-**Chris Westendorf:**: Unsupervised Learning & Stock Selection, LSTM Ensembles, Reporting
+### Contributions to the Project:
+-**Allie Bergman:** Linear Models & Random Forest, Data Gathering, Feature Engineering, Reporting
+-**Armand Khachatourian:** XGBoost & Feature Importance, Feature Engineering, Backtesting, Reporting
+-**Chris Westendorf:**: Unsupervised Learning & Stock Selection, Feature Engineering, LSTM Ensembles, Reporting
