@@ -24,8 +24,8 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/00_Decomposition_4_Clustering/00_120d_CEEMDAN.ipynb">Clustering Stocks</a>
 
 ### 3.5 Forecasting Models
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/04_Linear_Models/Linear%20Prediction%20Models.ipynb">Linear Models</a>
-* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost">XGBoost Models</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/03_XGBoost">XGBoost Models & Feature Importance</a>
+* <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/notebooks/04_Linear_Models/Linear%20Prediction%20Models.ipynb">Linear Models & Random Forest</a>
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/tree/main/notebooks/02_DNN">LSTM Models</a>
 
 ### 4.2 Backtesting Results
