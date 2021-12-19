@@ -10,7 +10,7 @@ We conducted an empirical survey of these distinct approaches to forecasting sto
 
 <a href="#">Module Requirements Are Here</a>
 
-## Notebooks & Scripts : Used Referenced in The Report
+## Notebooks & Scripts : Referenced in the Report
 
 ### 2.Data Acquisition
 * <a href="https://github.com/auguryChris/financial_forecasting_analysis/blob/main/scripts/data_retrieval.py">Data Retrieval</a>
