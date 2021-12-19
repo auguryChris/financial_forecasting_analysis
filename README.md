@@ -1,6 +1,6 @@
 # Financial Forecasting and Backtesting with Machine Learning
 ### An empirical survey of financial time series forecasting techniques using S&P 500 data
-By Allie Bergman, Armand Khachatourian, Chris Westendorf
+By Allie Bergmann, Armand Khachatourian, Chris Westendorf
 ## Abstract
 We conducted an empirical survey of these distinct approaches to forecasting stock prices on a daily scale. Specifically we forecasted using: XGBoost Regression, AR, ARIMA, SARIMA, Linear Regression, Random Forests, and various Deep Neural Network LSTM ensembles. We also explored training these models using 363 features that leverage fundamental and technical information. The motivation for this effort is to be able to articulate in layman’s terms the nuanced trade-offs and impact that decisions about feature engineering, signal processing, model complexity, model interpretability have on numerical accuracy and the resulting forecast's potential to create value.
 
