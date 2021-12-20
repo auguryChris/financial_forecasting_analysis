@@ -151,7 +151,7 @@ We noticed that researchers using CEEMDAN have been decomposing an entire time s
 
 While validating our decomposition methodology we also empirically observed that the decomposition normalized our upward trending features  in such a way that we could also min-max scale our data without being concerned about data leakage. 
 
-<p align="center"><img src='MSFT_2020_CEEMDAN_non_normalized_compiled_small.png' alt='IMF Visual explanation' width="800"><br>Feature decomposition from different time-series cuts: MSFT 2020</p>
+<p align="center"><img src='images/MSFT_2020_CEEMDAN_non_normalized_compiled_small.png' alt='IMF Visual explanation' width="800"><br>Feature decomposition from different time-series cuts: MSFT 2020</p>
 
 **Target Feature**
 
