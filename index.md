@@ -18,53 +18,55 @@ Syntax highlighted code block
 
 ## Table of Contents
 <ol type="1">
-    <li>Introduction</li>
+    <li><a href="#1">Introduction</a></li>
     <ul>
-        <li>1.1 Background </li>
-        <li>1.2 Audience & Motivation </li>
+        <li><a href="#1.1">1.1 Background</a></li>
+        <li><a href="#1.2">1.2 Audience & Motivation</a></li>
     </ul>
-    <li>Data Acquisition</li>
+    <li><a href="#2">Data Acquisition</a></li>
     <ul>
-       <li>2.1 Data Sources</li>
+        <li><a href="#2.1">2.1 Data Sources</a></li>
     </ul>
-    <li>Methodology</li>
+    <li><a href="#3">Methodology</a></li>
     <ul>
-        <li>3.1 Data Cleaning / Splitting</li>
-        <li>3.2 Feature Engineering</li>
-        <li>3.3 Scaling</li>
-        <li>3.4 Forecasting Models</li>
+        <li><a href="#3.1">3.1 Data Cleaning / Splitting</a></li>
+        <li><a href="#3.2">3.2 Feature Engineering</a></li>
+        <li><a href="#3.3">3.3 Scaling</a></li>
+        <li><a href="#3.4">3.4 Feature Importance & Dimensionality Reduction</a></li>
+        <li><a href="#3.5">3.5 Unsupervised Learning Stock Picks</a></li>
+        <li><a href="#3.6">3.6 Forecasting Models</a></li>
     </ul>
-    <li>Results & Discussion</li>
+    <li><a href="#4">Results & Discussion</a></li>
     <ul>
-        <li>4.1 Forecasting Numerical Results</li>
-        <li>4.2 Back Testing Results</li>
-        <li>4.3 Discussion & Failure Analysis</li>
+        <li><a href="#4.1">4.1 Forecasting Numerical Results</a></li>
+        <li><a href="#4.2">4.2 Back Testing Results</a></li>
+        <li><a href="#4.3">4.3 Discussion & Failure Analysis</a></li>
     </ul>
-    <li>Conclusion & Future Direction</li>
+    <li><a href="#5">Conclusion & Future Direction</a></li>
 </ol>
     
-## 1. Introduction
-### 1.1.Background
+## <a id="1">1. Introduction</a>
+### <a id="1.1">1.1.Background</a>
 Financial time series analysis and forecasting have had several approaches over time. Many scholars and teams of professionals have devoted their life’s work to trying to forecast stock prices accurately. The traditional models follow a stochastic probabilistic approach, while more recent models are based on machine learning methods. Currently, the most widely used approaches to forecasting can be roughly divided into two groups: statistical approaches and artificial intelligence approaches. 
 
 The traditional statistical models arose in the beginning of the last century with Yule and Walker, who proposed the autoregressive model (AR)  describing linear relations between past and future values. After that, Whittle showed better results by also considering moving averages, extending the AR model into ARMA. Then, Box and Jenkins proposed a method to estimate ARMA coefficients and they also popularized model variations including seasonality and integrality (ARIMA and SARIMA). More advances on explaining and predicting time series are Engle’s results for modelling time series volatility and Hamilton’s cointegration theory. These approaches were very successful to explain time series based on a priori hypothesis, generating a single model that can be applied to circumstantial situations. However, although statistical approaches improve the accuracy of forecasting stock prices to some extent, the assumption of linearity of stock prices cannot be met according to some recent research, and hence it limits the accuracy. 
 
 More recent models try to focus on learning the behavior of a series from its data, without prior explicit assumptions, such as linearity or stationarity. This approach makes it possible to use machine learning and signal processing techniques with less financial market singularities, for instance market’s liquidity, volatility or efficiency. Therefore, a variety of Machine Learning (ML) and Artificial Intelligence (AI) approaches have been proposed to capture the nonlinearity and nonstationarity of stock prices in the last decades. These models are a hybrid combination of neural network models, traditional models and signal processing. This last element is responsible for decomposing or filtering a time series prior to the model fitting. 
     
-### 1.2 Audience Motivation
+### <a id="1.2">1.2 Audience Motivation</a>
 We conducted an empirical survey of these distinct approaches to forecasting stock prices on a daily scale. Specifically we forecasted using: Auto Regression (AR), ARIMA, SARIMA, Linear Regression, Random Forests, XGBoosted Decision Trees, and various Deep Neural Network LSTM ensembles. We also explored training these models using 363 features that leverage fundamental and technical information. The motivation for this effort is to be able to articulate the nuanced trade-offs and impact that decisions about feature engineering, signal processing, model complexity, model interpretability have on numerical accuracy and the resulting forecast's potential to create value.
     
-## 2.Data Acquisition
-### 2.1 Data Sources
+## <a id="2">2.Data Acquisition</a>
+### <a id="2.1">2.1 Data Sources</a>
 For our initial dataset, we use yfinance for daily pricing data, and Nasdaq (formerly Quandl) for fundamentals data. We obtain a dataframe with one time series for each of the features, for each of the companies we are working with. The daily pricing data includes 5 columns containing pricing information for each company: Open, High, Low, Close, Volume. This is standard ticker (stock) data that is easily accessible through the yfinance library. The fundamental data is a proprietary dataset that is available through https://data.nasdaq.com/databases/SF1/data, containing 20 years of data with 150 fundamental indicators for over 14,000 companies. For our initial dataset, we gathered 104 fundamental indicators along with the 5 standard price indicators.  We take the fundamental and yfinance data and join the data based on the current S&P 500 companies to reduce the size. 
 
 
-## 3. Methodology
-### 3.1 Data Cleaning & Splitting
+## <a id="3">3. Methodology</a>
+### <a id="3.1">3.1 Data Cleaning & Splitting</a>
 **Splitting the data**
 The test-train split for modeling was 80-10-10, representing 80% (4336 days) training data, 10% (542 days) validation data, and 10% (542 days) final holdout test data. The decision to leave cross validation out was due to the relatively low number of data instances compared to using higher frequency data. If using higher frequency data with a similar target, we would be able to benefit from a windowed time series cross validation and achieve more robust results. Since we only tested results on the last 20% of the data, our models may perform worse if there is a regime change. In other words, if the distribution of the features drastically changes during a new time period, our current models would not be robust to those new distributions.
     
-### 3.2 Feature Engineering
+### <a id="3.2">3.2 Feature Engineering</a>
 **Feature Engineering to Create Technical Features**
     
 In order to create additional features on top of our core pricing and fundamental data, we used a Python technical analysis library, https://github.com/bukosabino/ta, to help engineer our remaining features. We used rolling windows of 6, 18, 24, 30, 50, 100, and 200 days for each technical indicator in our list. In total, we created an additional 254 technical features, which amounted to 363 combined price features that reflected volatility, momentum, volume, and trend to use for modeling. We trained each model on the same length of data instances, which is 5419 trading days in total. 
@@ -73,7 +75,8 @@ In order to create additional features on top of our core pricing and fundamenta
 
 ***Relative Strength Index (RSI) momentum indicator***
 
-Relative Strength Index is a momentum indicator that tracks the magnitude of recent price changes. The recency component, as well as the ability to include magnitude, means the indicator can evaluate overbought/oversold conditions quickly, despite being a lagging indicator. The indicator is an oscillator (ranges between two values) and often has cutoffs at 80% (overbought) and 20% (oversold), though you may find these as a 70/30 split as well. Our combination list iterated over the lookback period length. More information: [https://www.investopedia.com/terms/r/rsi.asp](https://www.investopedia.com/terms/r/rsi.asp)
+Relative Strength Index is a momentum indicator that tracks the magnitude of recent price changes. The recency component, as well as the ability to include magnitude, means the indicator can evaluate overbought/oversold conditions quickly, despite being a lagging indicator. The indicator is an oscillator (ranges between two values) and often has cutoffs at 80% (overbought) and 20% (oversold), though you may find these as a 70/30 split as well. Our combination list iterated over the lookback period length. 
+More information: [https://www.investopedia.com/terms/r/rsi.asp](https://www.investopedia.com/terms/r/rsi.asp)
     
 ***MACD trend-following momentum indicator***
     
@@ -158,17 +161,18 @@ While validating our decomposition methodology we also empirically observed that
 At first we explored forecasting the next day closing price directly. However, we found that target variable to be quite noisy. Intuitively you may consider that the end of the day is a random moment that closes the time series amid fluctuations and therefore has the noise of randomness attached to it. So instead we found more stable results with log return from close to next day high as the target variable. This can be described as 𝑙𝑛 (next day high / current close). The reasoning behind normalizing the next-day target by current close was to allow the models to learn meaningful information from the training data. For each ticker in the S&P 500, there is a significant upward shift in prices over the last 10 years. Normalizing each 1-day high target by the current close keeps the target range-bound to log return of day to day movements, making the target easier to scale. Since the training data accurately represents the distribution of daily close-to-high movement, we are able to compute a minmax scaler using only the training data and apply it to the remaining test data.
 
 Additionally, this target feature reduces noise that exists in close-to-close or high-to-high trends, and lends itself to a more practical application in trading for alpha. For example, if the high price prediction for tomorrow’s trading day is higher than today’s close, we have an opportunity for a return, regardless of whether the close is up or down from today.
-Feature Scaling
+
+### <a id="3.3">3.3 Feature Scaling</a>
 
 In the end we opted for the most widely used financial time-series scaling method, min-max scaling. The main caveat of using the min-max normalization method in time series forecasts is that the minimum and maximum values of out-of-sample data sets are unknown. Our mitigation strategy was normalizing our target variable using log return, which bounded our target feature. It is worth noting that this out-of-sample concern can also be mitigated by decision trees. A key benefit to decision trees is that one does not have to worry about scaling the Independent variables (features). 
 
-### 3.3 Feature Importance & Dimensionality Reduction
+### <a id="3.4">3.4 Feature Importance & Dimensionality Reduction</a>
 
 The best parameter tuned models for each stock were then used to compute feature importance with TreeSHAP, a game theoretic algorithm that computes Shapley Additive Explanation values for tree ensembles. The goal of SHAP is to explain the prediction of an instance x by computing the contribution of each feature to the prediction. TreeSHAP defines the value function using the conditional expectation instead of the marginal expectation like the other SHAP variants. A full detailed description on TreeSHAP and SHAP (SHapley Additive exPlanations) can be found at https://christophm.github.io/interpretable-ml-book/shap.html#treeshap. We averaged the top 50 most important features per stock and combined them to reduce the feature space from 363 to 50. Reducing the feature space has the distinct benefit of aiding in convergence by separating noisy features for downstream model training. It is worth noting that many of the top 50 features are long-term technical indicators, with many of them having a moving window of 200 days. This is partly due to the fact that large changes in the longer-windowed features indicate a significant change in momentum, volatility, volume, and/or trend of the underlying stock. 
 
 <p align="center"><img src='images/MSFT_2020_CEEMDAN_non_normalized.png' alt='IMF Visual explanation'><br>The following is the top 50 average feature importance across all stocks</p>
 
-### 3.4 Unsupervised Learning Stock Picks
+### <a id="3.5">3.5 Unsupervised Learning Stock Picks</a>
 In a conscious effort to test the robustness of forecasting techniques we did not simply choose stocks of interest––sexy stocks. Instead we chose stocks with different time series characteristics so that we had the opportunity to observe how different time series characteristics might favor different modeling techniques. To do this we took the following 8 steps:
 
 1. Select the last 120 days of 2021 in our data.
@@ -182,7 +186,7 @@ In a conscious effort to test the robustness of forecasting techniques we did no
 
 The final stocks in this list are Microsoft (Software-Infrastructure), Home Depot (Consumer), United Health Care (Healthcare), XOM (Energy), Autodesk (Software-Application), and Waters Corporation (Healthcare). Note that the last two stocks in this list, ADSK and WAT, had a very low similarity score with the other stocks. These stocks seem to have more noise in their day-to-day movements when compared to the other stocks in the analysis.
 
-### 3.5 Forecasting Models
+### <a id="3.6">3.6 Forecasting Models</a>
 
 **XGboost Model**
 
@@ -229,11 +233,11 @@ As previously mentioned, more recent models try to focus on learning the behavio
 </ol>
 <p align="center"><img src="images/LSTM_Architecture_Diagram.png" alt='LSTM_Architecture_Diagram' height='350'><img src="images/LSTM_Feature_diagram.png" alt='LSTM_Architecture_Diagram' height='350'><br>(Left ) is the diagram for our LSTM architecture; (Right) is the generalized ensemble yielding the best results </p>
 
-## 4. Discussion & Results
+## <a id="4">4. Discussion & Results</a>
 
 <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/1.embed"></iframe>
 
-### 4.1 Numeric Accuracy Results
+### <a id="4.1">4.1 Numeric Accuracy Results</a>
 
 The error metrics were calculated over the test dataset after inverse transforming the target back into predicted next-day high. These predictions were scored on Root Mean Squared Error (RMSE) to indicate absolute error, and Mean Absolute Percentage Error (MAPE) to indicate magnitude of error.
 
@@ -265,7 +269,7 @@ The results for Random Forest on the test set are actually the best, if not tied
 
 It is worth noting that this model often was the second most numerically accurate model. And this is worth nothing because it is the only model that did not use the 50 features the other models used. Instead this model was able to infer comparable signal information through frequency decomposition. We found this fascinating given all the focused effort that traditionally goes into financial time-series feature engineering.
 
-### 4.2 Backtesting Results
+### <a id="4.2">4.2 Backtesting Results</a>
 
 Backtesting is the general method for seeing how well a strategy or model would have done ex-post. Backtesting assesses the viability of a trading strategy by discovering how it would play out using historical data. If backtesting works, traders and analysts may have the confidence to employ it going forward. Backtesting was performed on the test data only in order to keep the results similar to a live trading period. 
 
@@ -279,13 +283,13 @@ This backtest is over 544 trading days, with $100,000 as the starting cash. Buy 
 
 # Insert Charts
 
-## 4.3 Results Discussion
+## <a id="4.3">4.3 Results Discussion</a>
 
 Although the XGBoost and Linear Regression models achieved the worst loss scores of all models, they performed the best in the backtest. The reason for this surprising result is due to the fact that the trading strategy logic is not optimized to take full advantage of numerical accuracy of predictions. For example, after an analysis of the predictions for each model, we saw that the XGBoost, Random Forest, and Linear Regression models tend to often overestimate the next-day high, whereas the other models underestimate the next-day high. The result is that the underestimated prediction sell orders will always execute, whereas the XGBoost and Linear Regression strategies will often hold the position for longer since their predictions are frequently larger than the true target value. As a result, the XGBoost strategy was able to take advantage of the benefits of holding the position, while only executing sell orders at relatively high prices. 
 
 With that said, there are certainly many ways to improve this baseline trading strategy. For example, we can have smarter entry points. Currently, buy orders are being executed at market price at the open, which means we get in position as soon as possible when not in a position. Returns may increase if entry constraints are increased. Another idea is to resize orders. Orders for this strategy baseline are currently 100% in or 100% out of position. This has benefits if you want less exposure to the long term movement of the stocks. Depending on the situation and strategy, we might want to reserve a cash position to expose ourselves less to short term movements. Additionally, we can include more stocks in our portfolio to decrease exposure and return variance even further. Finally, we can incorporate model ensembling into our trading strategies. Models with similar loss metrics on the test data and good performances on the backtest can be ensembled to create better predictions. A combination of these ideas can be employed to ensure that we are leveraging the numerical accuracy of the predictions effectively.
 
-## 5. Conclusion
+## <a id="5">5. Conclusion</a>
 Approaches to stock selection and feature space designing are limitless. Here the motivation was not to have the best answer to these challenges because that does not exist. All models are wrong at the end of the day but some of them are more useful than others. So instead, our motivation was to be able to inform readers on the nuanced trade-offs and impact that decisions about feature engineering, signal processing, model complexity, model interpretability have on numerical accuracy and the resulting forecast's potential to create value. In summary, we empirically observed that there isn’t a wildly significant numerical difference when predicting the next day high. For basic trading strategies, similar to what we’ve employed for this analysis, simple models work reasonably well. 
 
 Feature engineering is certainly a notable caveat as there are endless ways to design a ticker’s feature space. It is worth underlining the scaling challenge of working with stock features.  In decision tree models, scaling of features is not necessary. In terms of feature space, it is worth reiterating that a majority of the most important, informative, features were long term features that have a moving window of 200 days. This is worth noting because it is critical to identify regime switches when forecasting stocks. 
