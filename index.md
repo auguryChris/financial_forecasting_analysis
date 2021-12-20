@@ -153,7 +153,7 @@ We noticed that researchers using CEEMDAN have been decomposing an entire time s
 
 While validating our decomposition methodology we also empirically observed that the decomposition normalized our upward trending features  in such a way that we could also min-max scale our data without being concerned about data leakage. 
 
-<p align="center"><img src='images/MSFT_2020_CEEMDAN_non_normalized_compiled_small.png' alt='IMF Visual explanation' width="800"><br><b><i>Feature decomposition from different time-series cuts: MSFT 2020</b></i></p>
+<p align="center"><img src='images/MSFT_2020_CEEMDAN_non_normalized_compiled_small.png' alt='IMF Visual explanation' width="800"><br>Feature decomposition from different time-series cuts: MSFT 2020</p>
 
 **Target Feature**
 
@@ -169,7 +169,7 @@ In the end we opted for the most widely used financial time-series scaling metho
 
 The best parameter tuned models for each stock were then used to compute feature importance with TreeSHAP, a game theoretic algorithm that computes Shapley Additive Explanation values for tree ensembles. The goal of SHAP is to explain the prediction of an instance x by computing the contribution of each feature to the prediction. TreeSHAP defines the value function using the conditional expectation instead of the marginal expectation like the other SHAP variants. A full detailed description on TreeSHAP and SHAP (SHapley Additive exPlanations) can be found at https://christophm.github.io/interpretable-ml-book/shap.html#treeshap. We averaged the top 50 most important features per stock and combined them to reduce the feature space from 363 to 50. Reducing the feature space has the distinct benefit of aiding in convergence by separating noisy features for downstream model training. It is worth noting that many of the top 50 features are long-term technical indicators, with many of them having a moving window of 200 days. This is partly due to the fact that large changes in the longer-windowed features indicate a significant change in momentum, volatility, volume, and/or trend of the underlying stock. 
 
-<p align="center"><img src='images/MSFT_2020_CEEMDAN_non_normalized.png' alt='IMF Visual explanation'><br><b><i>The following is the top 50 average feature importance across all stocks</b></i></p>
+<p align="center"><img src='images/feature_importance_chart.png' alt='IMF Visual explanation'><br>The following is the top 50 average feature importance across all stocks</p>
 
 ### <a id="3.5"></a>3.5 Unsupervised Learning Stock Picks
 In a conscious effort to test the robustness of forecasting techniques we did not simply choose stocks of interest––sexy stocks. Instead we chose stocks with different time series characteristics so that we had the opportunity to observe how different time series characteristics might favor different modeling techniques. To do this we took the following 8 steps:
@@ -184,6 +184,10 @@ In a conscious effort to test the robustness of forecasting techniques we did no
 8. This led us to choosing tickers: MSFT, HD, UNH, XOM, ADSK, WAT.
 
 The final stocks in this list are Microsoft (Software-Infrastructure), Home Depot (Consumer), United Health Care (Healthcare), XOM (Energy), Autodesk (Software-Application), and Waters Corporation (Healthcare). Note that the last two stocks in this list, ADSK and WAT, had a very low similarity score with the other stocks. These stocks seem to have more noise in their day-to-day movements when compared to the other stocks in the analysis.
+
+<iframe width="800" height="400" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/5.embed"></iframe>
+<iframe width="800" height="400" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/7.embed"></iframe>
+
 
 ### <a id="3.6"></a>3.6 Forecasting Models
 
@@ -230,11 +234,11 @@ As previously mentioned, more recent models try to focus on learning the behavio
     </ol>
     <li>In the last stage, the predicted results from all components are aggregated as the final results and then denormalized into the original prediction space by multiplying the IMF with the previous day’s Close.</li>
 </ol>
-<p align="center"><img src="images/LSTM_Architecture_Diagram.png" alt='LSTM_Architecture_Diagram' height='350'><img src="images/LSTM_Feature_diagram.png" alt='LSTM_Architecture_Diagram' height='350'><br><b><i>(Left ) is the diagram for our LSTM architecture; (Right) is the generalized ensemble yielding the best results </b></i></p>
+<p align="center"><img src="images/LSTM_Architecture_Diagram.png" alt='LSTM_Architecture_Diagram' height='350'><img src="images/LSTM_Feature_diagram.png" alt='LSTM_Architecture_Diagram' height='350'><br>(Left ) is the diagram for our LSTM architecture; (Right) is the generalized ensemble yielding the best results </p>
 
 ## <a id="4"></a>4. Discussion & Results
 
-<iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/1.embed"></iframe>
+<iframe width="800" height="600" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/1.embed"></iframe>
 
 ### <a id="4.1"></a>4.1 Numeric Accuracy Results
 
@@ -280,7 +284,9 @@ The backtesting period data was never used for training or tuning the models. In
 
 This backtest is over 544 trading days, with $100,000 as the starting cash. Buy and hold for each stock in our portfolio averaged ~77% overall over the entire period, whereas the XGBoost high-selling strategy averaged ~96% for the same stocks and time period. This means that our starting cash at the end of the period with the XGBoost strategy was $196k vs $177k for buy and hold. The sharpe ratio reported here is average monthly sharpe with 0% risk-free rate, meaning that we simply take the return of a 1-month period (including any weekends and holidays) and normalize by the 1-month standard deviation of that same period. Max drawdown is the maximum observed loss from a peak to a trough of a portfolio, which is expressed in terms of percentages. Maximum loss for buy and hold was ~38% over the trading period, whereas XGBoost strategy was only ~27%. 
 
-# Insert Charts
+<p align="center"><img src='images/average_backtest_results.png' alt='IMF Visual explanation'><br></p>
+
+<p align="center"><img src='images/per_stock_backtest_results.png' alt='IMF Visual explanation'><br></p>
 
 ## <a id="4.3"></a>4.3 Results Discussion
 
