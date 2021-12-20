@@ -1,21 +1,4 @@
 
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-
-
 ## Table of Contents
 <ol type="1">
     <li><a href="#1">Introduction</a></li>
