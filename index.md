@@ -28,28 +28,28 @@
     <li><a href="#5">Conclusion & Future Direction</a></li>
 </ol>
     
-## <a id="1">1. Introduction</a>
-### <a id="1.1">1.1.Background</a>
+## <a id="1"></a>1. Introduction
+### <a id="1.1"></a>1.1.Background
 Financial time series analysis and forecasting have had several approaches over time. Many scholars and teams of professionals have devoted their life’s work to trying to forecast stock prices accurately. The traditional models follow a stochastic probabilistic approach, while more recent models are based on machine learning methods. Currently, the most widely used approaches to forecasting can be roughly divided into two groups: statistical approaches and artificial intelligence approaches. 
 
 The traditional statistical models arose in the beginning of the last century with Yule and Walker, who proposed the autoregressive model (AR)  describing linear relations between past and future values. After that, Whittle showed better results by also considering moving averages, extending the AR model into ARMA. Then, Box and Jenkins proposed a method to estimate ARMA coefficients and they also popularized model variations including seasonality and integrality (ARIMA and SARIMA). More advances on explaining and predicting time series are Engle’s results for modelling time series volatility and Hamilton’s cointegration theory. These approaches were very successful to explain time series based on a priori hypothesis, generating a single model that can be applied to circumstantial situations. However, although statistical approaches improve the accuracy of forecasting stock prices to some extent, the assumption of linearity of stock prices cannot be met according to some recent research, and hence it limits the accuracy. 
 
 More recent models try to focus on learning the behavior of a series from its data, without prior explicit assumptions, such as linearity or stationarity. This approach makes it possible to use machine learning and signal processing techniques with less financial market singularities, for instance market’s liquidity, volatility or efficiency. Therefore, a variety of Machine Learning (ML) and Artificial Intelligence (AI) approaches have been proposed to capture the nonlinearity and nonstationarity of stock prices in the last decades. These models are a hybrid combination of neural network models, traditional models and signal processing. This last element is responsible for decomposing or filtering a time series prior to the model fitting. 
     
-### <a id="1.2">1.2 Audience Motivation</a>
+### <a id="1.2"></a>1.2 Audience Motivation
 We conducted an empirical survey of these distinct approaches to forecasting stock prices on a daily scale. Specifically we forecasted using: Auto Regression (AR), ARIMA, SARIMA, Linear Regression, Random Forests, XGBoosted Decision Trees, and various Deep Neural Network LSTM ensembles. We also explored training these models using 363 features that leverage fundamental and technical information. The motivation for this effort is to be able to articulate the nuanced trade-offs and impact that decisions about feature engineering, signal processing, model complexity, model interpretability have on numerical accuracy and the resulting forecast's potential to create value.
     
-## <a id="2">2.Data Acquisition</a>
-### <a id="2.1">2.1 Data Sources</a>
+## <a id="2"></a>2.Data Acquisition
+### <a id="2.1"></a>2.1 Data Sources
 For our initial dataset, we use yfinance for daily pricing data, and Nasdaq (formerly Quandl) for fundamentals data. We obtain a dataframe with one time series for each of the features, for each of the companies we are working with. The daily pricing data includes 5 columns containing pricing information for each company: Open, High, Low, Close, Volume. This is standard ticker (stock) data that is easily accessible through the yfinance library. The fundamental data is a proprietary dataset that is available through https://data.nasdaq.com/databases/SF1/data, containing 20 years of data with 150 fundamental indicators for over 14,000 companies. For our initial dataset, we gathered 104 fundamental indicators along with the 5 standard price indicators.  We take the fundamental and yfinance data and join the data based on the current S&P 500 companies to reduce the size. 
 
 
-## <a id="3">3. Methodology</a>
-### <a id="3.1">3.1 Data Cleaning & Splitting</a>
+## <a id="3"></a>3. Methodology
+### <a id="3.1"></a>3.1 Data Cleaning & Splitting
 **Splitting the data**
 The test-train split for modeling was 80-10-10, representing 80% (4336 days) training data, 10% (542 days) validation data, and 10% (542 days) final holdout test data. The decision to leave cross validation out was due to the relatively low number of data instances compared to using higher frequency data. If using higher frequency data with a similar target, we would be able to benefit from a windowed time series cross validation and achieve more robust results. Since we only tested results on the last 20% of the data, our models may perform worse if there is a regime change. In other words, if the distribution of the features drastically changes during a new time period, our current models would not be robust to those new distributions.
     
-### <a id="3.2">3.2 Feature Engineering</a>
+### <a id="3.2"></a>3.2 Feature Engineering
 **Feature Engineering to Create Technical Features**
     
 In order to create additional features on top of our core pricing and fundamental data, we used a Python technical analysis library, https://github.com/bukosabino/ta, to help engineer our remaining features. We used rolling windows of 6, 18, 24, 30, 50, 100, and 200 days for each technical indicator in our list. In total, we created an additional 254 technical features, which amounted to 363 combined price features that reflected volatility, momentum, volume, and trend to use for modeling. We trained each model on the same length of data instances, which is 5419 trading days in total. 
@@ -59,66 +59,79 @@ In order to create additional features on top of our core pricing and fundamenta
 ***Relative Strength Index (RSI) momentum indicator***
 
 Relative Strength Index is a momentum indicator that tracks the magnitude of recent price changes. The recency component, as well as the ability to include magnitude, means the indicator can evaluate overbought/oversold conditions quickly, despite being a lagging indicator. The indicator is an oscillator (ranges between two values) and often has cutoffs at 80% (overbought) and 20% (oversold), though you may find these as a 70/30 split as well. Our combination list iterated over the lookback period length. 
+
 More information: [https://www.investopedia.com/terms/r/rsi.asp](https://www.investopedia.com/terms/r/rsi.asp)
     
 ***MACD trend-following momentum indicator***
     
 MACD (Moving Average Convergence Divergence) is a lagging trend-following momentum indicator. This indicator leverages two different moving averages for a ticker’s price, where one is slower and one is faster, and the difference is taken between the two to determine the MACD line. There is also a signal line, typically faster than the faster of the moving averages, which acts as an indicator for buys and sells. When the MACD line passes above the signal line, the security is considered a Buy. Our combination list iterated over the short and long lookback period lengths,  where the faster is less than the slower length. Our feature metric is the difference between these two, for some normalization around 0. 
+
 More information: [https://www.investopedia.com/terms/m/macd.asp](https://www.investopedia.com/terms/m/macd.asp)
     
 ***Bollinger Bands (BB) volatility indicator***
     
 Bollinger Bands are a volatility indicator that leverages standard deviations of volatility to identify two bands - one above and one below the SMA for price movement - for what would be reasonable volatility ranges. This is a way to identify overbought/oversold conditions (where above the higher band is overbought, below the lower band is oversold). In more volatile markets, bands widen; in less volatile markets bands contract. Our combination list iterated over the lookback period length, a traditional, uniform 2 standard deviations were used throughout all iterations, and the indicator returned both band values, as well as a binary 0/1 for both high and low bands as to whether the price movement had crossed it, providing a normalized value across securities.
+
 More information: [https://www.investopedia.com/terms/b/bollingerbands.asp](https://www.investopedia.com/terms/b/bollingerbands.asp)
     
 ***On-Balance Volume (OBV) volume indicator***
     
 On-Balance Volume is a technical momentum indicator that uses volume to predict stock price changes. Volume can be a strong indicator of momentum, in that significant volume flows and changes can mean a material price change with “stickiness”. If volume increases significantly with no immediate stock price chance, that means that the change is likely about to happen. Based on today’s closing price in relation to yesterday’s closing price, we can also assign direction to this indicator (bearish/bullish). OBV does not require a window, as it is a running summation of volume.
+
 More information: [https://www.investopedia.com/terms/o/onbalancevolume.asp](https://www.investopedia.com/terms/o/onbalancevolume.asp)
     
 ***Average True Range (ATR) volatility indicator***
     
 Average True Range is a volatility indicator that decomposes the price range movement for a lookback time period. The ATR is a moving average of the true ranges, defined as the maximum of three different range-related values. Our combination list iterated over the lookback period length of this moving average window.
+
 More information: [https://www.investopedia.com/terms/a/atr.asp](https://www.investopedia.com/terms/a/atr.asp)
     
 ***Stochastic Oscillator (SR) momentum indicator***
     
 A stochastic oscillator is a momentum indicator that compares closing price to a factor of high and low price ranges over a lookback window. The indicator is an oscillator, indicating it is range-bound, bouncing between a range of 0-100. It specifically indicates overbought/oversold conditions. Our combination list iterated over the lookback period length.
+
 More information: [https://www.investopedia.com/terms/s/stochasticoscillator.asp](https://www.investopedia.com/terms/s/stochasticoscillator.asp)
     
 ***Volume-Price Trend (VPT) volume indicator***
     
 Volume-Price Trend is a volume indicator that helps identify price direction and the magnitude of that movement. It is specifically used to determine supply and demand of a security. Like On-Balance volume, the VPT consists of a cumulative volume trend line, though leveraging a multiple of the percentage change as opposed to flat volume count, as well as a smoothed moving average of that line. VPT does not require a window.
+
 More information: [https://www.investopedia.com/terms/v/vptindicator.asp](https://www.investopedia.com/terms/v/vptindicator.asp)
 
 ***Accumulation/Distribution Index (ADI) volume indicator***
     
 Similarly to Volume-Price Trend, ADI is a volume indicator that uses a money flow multiplier and volume to determine supply and demand of a security. The money flow multiplier is a percentage derived using differences in high, low, and close prices for the period. ADI does not require a window. 
+
 More information: [https://www.investopedia.com/terms/a/accumulationdistribution.asp](https://www.investopedia.com/terms/a/accumulationdistribution.asp)
 
 ***Chaikin Money Flow (CMF) volume indicator***
     
 Chaikin Money Flow is a volume indicator that is an oscillator. It operates under the assumption that values above zero indicate strength, and values below zero indicate weakness in a security’s price. The CMF is similar to ADI, except that it leverages a lookback window to create a moving average and generates a signal line with this. Our combination list iterated over the lookback period length of the moving average window.
+
 More information: [https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/cmf](https://www.fidelity.com/learning-center/trading-investing/technical-analysis/technical-indicator-guide/cmf)
     
 ***Ichimoku Kinko Hyo trend and momentum indicator***
     
 Ichimoku is a trend and momentum indicator that is used to determine support and resistance levels. There are five parts to the Ichimoku Kinko Hyo, each determining something important about the stock’s movements. These lines create a combination of moving averages of highs, lows, closes, divergences, and convergences that generate insight to lines of support and resistance, as well as crossovers. Our combination list iterated over the three possible window lookback period lengths,  where the faster is less than middle, is less than the slower length. Our feature metrics related to Ichimoku are the values of the conversion lines, values of the base lines, and the differences between those two for some normalization around 0.
+
 More information: [https://www.investopedia.com/terms/i/ichimokuchart.asp](https://www.investopedia.com/terms/i/ichimokuchart.asp)
     
 ***Donchian Channel volatility indicator***
     
 The Donchian Channel is a volatility indicator that comprises three lines, where one is a moving average and the other two are bands. The upper band is the highest price of a security over a lookback period, and the lower band is the lowest price of a security during that same period. A breakthrough in either direction indicates strong volatility and momentum in those directions. Our combination list iterated over the lookback period length.
+
 More information: [https://www.investopedia.com/terms/d/donchianchannels.asp](https://www.investopedia.com/terms/d/donchianchannels.asp)
     
 ***Simple Moving Average (SMA)***
     
 A simple moving average is a trend indicator, and is just the arithmetic mean of the price over a particular lookback period.
+
 More information: [https://www.investopedia.com/terms/m/movingaverage.asp](https://www.investopedia.com/terms/m/movingaverage.asp)
     
 ***Exponential Moving Average (EMA) trend indicator***
     
 An exponential moving average is a trend indicator, and is a weighted average of the price over a particular lookback period that takes recency into account, and is thus more responsive to new information in pricing changes. 
+
 More information: [https://www.investopedia.com/terms/m/movingaverage.asp](https://www.investopedia.com/terms/m/movingaverage.asp)
     
 **Fundamentals (General)**
@@ -128,9 +141,9 @@ Fundamentals are a category of metrics that are not necessarily indicators for p
 The inclusion of fundamentals alongside technical indicators is the hope that aspects of the company’s underlying workings and fundamental value may lend some insight into its pricing and movements. The difficulty here is that these reports come out quarterly, and some stats are updated yearly, while technical indicators are different daily. So, this slower updating of information and subsequent feed-through to price may lead this subset to have less feature importance against a target with daily movement.
     
 **Signal Processing: Decomposition Features**
-As mentioned, in the last decade there has been a focus on a hybrid combination of neural network models and signal processing to capture the nonlinearity and nonstationarity of stock prices. Here the original time series is decomposed into several components. We leveraged the Complete Ensemble Empirical Mode Decomposition with Adaptive Noise ( CEEMDAN) to decompose our nonlinear, nonstationary sequences into intrinsic mode functions (IMFs) in the spirit of the Fourier series. In contrast to the Fourier series, they are not simply sine or cosine functions, but rather functions that represent the characteristics of the local oscillation frequency of the original data.
+As mentioned, in the last decade there has been a focus on a hybrid combination of neural network models and signal processing to capture the nonlinearity and nonstationarity of stock prices. Here the original time series is decomposed into several components. We leveraged the Complete Ensemble Empirical Mode Decomposition with Adaptive Noise (CEEMDAN) to decompose our nonlinear, nonstationary sequences into intrinsic mode functions (IMFs) in the spirit of the Fourier series. In contrast to the Fourier series, they are not simply sine or cosine functions, but rather functions that represent the characteristics of the local oscillation frequency of the original data.
 
-<p align="center"><img src='images/IMF_graphic.png' alt='IMF Visual explanation' width="400"></p>
+<p align="center"><img src='images/IMF_graphic.png' alt='IMF Visual explanation' width="400"><br>***CEEMDAN IMF calculation components***</p>
 
 ***Data Leakage Investigation***
 We noticed that researchers using CEEMDAN have been decomposing an entire time series before splitting into train, validation, and test sets. The conceptual exploitation here is that CEEMDAN is a localized calculation finding the mean, upper, and lower functions of the frequencies and therefore data leakage is not an issue. Being defensive about data leakage we tested this by performing CEEMDAN on different subsets of a time series. In the end, we observed that IMF1 & IMF2 empirically don’t afford data leakage, a contradiction of the strict rhetoric of processing after splitting. This was quite intriguing when considering that the best performing models from our investigation only used IMF1 + IMF2 as features and then did spline modeling to replace the remaining IMFs. 
@@ -145,17 +158,17 @@ At first we explored forecasting the next day closing price directly. However, w
 
 Additionally, this target feature reduces noise that exists in close-to-close or high-to-high trends, and lends itself to a more practical application in trading for alpha. For example, if the high price prediction for tomorrow’s trading day is higher than today’s close, we have an opportunity for a return, regardless of whether the close is up or down from today.
 
-### <a id="3.3">3.3 Feature Scaling</a>
+### <a id="3.3"></a>3.3 Feature Scaling
 
 In the end we opted for the most widely used financial time-series scaling method, min-max scaling. The main caveat of using the min-max normalization method in time series forecasts is that the minimum and maximum values of out-of-sample data sets are unknown. Our mitigation strategy was normalizing our target variable using log return, which bounded our target feature. It is worth noting that this out-of-sample concern can also be mitigated by decision trees. A key benefit to decision trees is that one does not have to worry about scaling the Independent variables (features). 
 
-### <a id="3.4">3.4 Feature Importance & Dimensionality Reduction</a>
+### <a id="3.4"></a>3.4 Feature Importance & Dimensionality Reduction
 
 The best parameter tuned models for each stock were then used to compute feature importance with TreeSHAP, a game theoretic algorithm that computes Shapley Additive Explanation values for tree ensembles. The goal of SHAP is to explain the prediction of an instance x by computing the contribution of each feature to the prediction. TreeSHAP defines the value function using the conditional expectation instead of the marginal expectation like the other SHAP variants. A full detailed description on TreeSHAP and SHAP (SHapley Additive exPlanations) can be found at https://christophm.github.io/interpretable-ml-book/shap.html#treeshap. We averaged the top 50 most important features per stock and combined them to reduce the feature space from 363 to 50. Reducing the feature space has the distinct benefit of aiding in convergence by separating noisy features for downstream model training. It is worth noting that many of the top 50 features are long-term technical indicators, with many of them having a moving window of 200 days. This is partly due to the fact that large changes in the longer-windowed features indicate a significant change in momentum, volatility, volume, and/or trend of the underlying stock. 
 
 <p align="center"><img src='images/MSFT_2020_CEEMDAN_non_normalized.png' alt='IMF Visual explanation'><br>***The following is the top 50 average feature importance across all stocks***</p>
 
-### <a id="3.5">3.5 Unsupervised Learning Stock Picks</a>
+### <a id="3.5"></a>3.5 Unsupervised Learning Stock Picks
 In a conscious effort to test the robustness of forecasting techniques we did not simply choose stocks of interest––sexy stocks. Instead we chose stocks with different time series characteristics so that we had the opportunity to observe how different time series characteristics might favor different modeling techniques. To do this we took the following 8 steps:
 
 1. Select the last 120 days of 2021 in our data.
@@ -169,7 +182,7 @@ In a conscious effort to test the robustness of forecasting techniques we did no
 
 The final stocks in this list are Microsoft (Software-Infrastructure), Home Depot (Consumer), United Health Care (Healthcare), XOM (Energy), Autodesk (Software-Application), and Waters Corporation (Healthcare). Note that the last two stocks in this list, ADSK and WAT, had a very low similarity score with the other stocks. These stocks seem to have more noise in their day-to-day movements when compared to the other stocks in the analysis.
 
-### <a id="3.6">3.6 Forecasting Models</a>
+### <a id="3.6"></a>3.6 Forecasting Models
 
 **XGboost Model**
 
@@ -216,11 +229,11 @@ As previously mentioned, more recent models try to focus on learning the behavio
 </ol>
 <p align="center"><img src="images/LSTM_Architecture_Diagram.png" alt='LSTM_Architecture_Diagram' height='350'><img src="images/LSTM_Feature_diagram.png" alt='LSTM_Architecture_Diagram' height='350'><br>***(Left ) is the diagram for our LSTM architecture; (Right) is the generalized ensemble yielding the best results ***</p>
 
-## <a id="4">4. Discussion & Results</a>
+## <a id="4"></a>4. Discussion & Results
 
 <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plotly.com/~augurychris/1.embed"></iframe>
 
-### <a id="4.1">4.1 Numeric Accuracy Results</a>
+### <a id="4.1"></a>4.1 Numeric Accuracy Results
 
 The error metrics were calculated over the test dataset after inverse transforming the target back into predicted next-day high. These predictions were scored on Root Mean Squared Error (RMSE) to indicate absolute error, and Mean Absolute Percentage Error (MAPE) to indicate magnitude of error.
 
@@ -252,7 +265,7 @@ The results for Random Forest on the test set are actually the best, if not tied
 
 It is worth noting that this model often was the second most numerically accurate model. And this is worth nothing because it is the only model that did not use the 50 features the other models used. Instead this model was able to infer comparable signal information through frequency decomposition. We found this fascinating given all the focused effort that traditionally goes into financial time-series feature engineering.
 
-### <a id="4.2">4.2 Backtesting Results</a>
+### <a id="4.2"></a>4.2 Backtesting Results
 
 Backtesting is the general method for seeing how well a strategy or model would have done ex-post. Backtesting assesses the viability of a trading strategy by discovering how it would play out using historical data. If backtesting works, traders and analysts may have the confidence to employ it going forward. Backtesting was performed on the test data only in order to keep the results similar to a live trading period. 
 
@@ -266,13 +279,13 @@ This backtest is over 544 trading days, with $100,000 as the starting cash. Buy 
 
 # Insert Charts
 
-## <a id="4.3">4.3 Results Discussion</a>
+## <a id="4.3"></a>4.3 Results Discussion
 
 Although the XGBoost and Linear Regression models achieved the worst loss scores of all models, they performed the best in the backtest. The reason for this surprising result is due to the fact that the trading strategy logic is not optimized to take full advantage of numerical accuracy of predictions. For example, after an analysis of the predictions for each model, we saw that the XGBoost, Random Forest, and Linear Regression models tend to often overestimate the next-day high, whereas the other models underestimate the next-day high. The result is that the underestimated prediction sell orders will always execute, whereas the XGBoost and Linear Regression strategies will often hold the position for longer since their predictions are frequently larger than the true target value. As a result, the XGBoost strategy was able to take advantage of the benefits of holding the position, while only executing sell orders at relatively high prices. 
 
 With that said, there are certainly many ways to improve this baseline trading strategy. For example, we can have smarter entry points. Currently, buy orders are being executed at market price at the open, which means we get in position as soon as possible when not in a position. Returns may increase if entry constraints are increased. Another idea is to resize orders. Orders for this strategy baseline are currently 100% in or 100% out of position. This has benefits if you want less exposure to the long term movement of the stocks. Depending on the situation and strategy, we might want to reserve a cash position to expose ourselves less to short term movements. Additionally, we can include more stocks in our portfolio to decrease exposure and return variance even further. Finally, we can incorporate model ensembling into our trading strategies. Models with similar loss metrics on the test data and good performances on the backtest can be ensembled to create better predictions. A combination of these ideas can be employed to ensure that we are leveraging the numerical accuracy of the predictions effectively.
 
-## <a id="5">5. Conclusion</a>
+## <a id="5"></a>5. Conclusion
 Approaches to stock selection and feature space designing are limitless. Here the motivation was not to have the best answer to these challenges because that does not exist. All models are wrong at the end of the day but some of them are more useful than others. So instead, our motivation was to be able to inform readers on the nuanced trade-offs and impact that decisions about feature engineering, signal processing, model complexity, model interpretability have on numerical accuracy and the resulting forecast's potential to create value. In summary, we empirically observed that there isn’t a wildly significant numerical difference when predicting the next day high. For basic trading strategies, similar to what we’ve employed for this analysis, simple models work reasonably well. 
 
 Feature engineering is certainly a notable caveat as there are endless ways to design a ticker’s feature space. It is worth underlining the scaling challenge of working with stock features.  In decision tree models, scaling of features is not necessary. In terms of feature space, it is worth reiterating that a majority of the most important, informative, features were long term features that have a moving window of 200 days. This is worth noting because it is critical to identify regime switches when forecasting stocks. 
@@ -290,21 +303,14 @@ With ~500 to choose from, we can very likely continue on to do some clustering b
 Additionally, there are limitless combinations of possible feature sets (particularly in the technical indicator space), and many different models and model parameters we could expand this to. We limited ourselves to S&P 500 daily data, but on a more granular level (secondly, minutely, hourly, etc.) data, or expanded over a wider swath of possible stocks, we may be able to achieve better results. We can also expand this into cryptocurrency, which would require a deeper dive into the target variable, since crypto markets have no close, and metrics like “high” are typically on a trailing 24-hour basis. It would require a more thorough look at the effects of daily vs more granular, higher frequency data, and how to adapt the code to read it. The increased frequency of the data may also lead to drastically different model success than daily data. All that said, the constant trading, if successful, may yield better returns over time than basic equity securities.
 
 
-<p></p>
-<p></p>
-<p></p>
-<p></p>
-</br>
-</br>
-</br>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+
 ### Contributions to the Project:
 - **Allie Bergman:** Linear Models & Random Forest, Data Gathering, Feature Engineering, Reporting
 - **Armand Khachatourian:** XGBoost & Feature Importance, Feature Engineering, Backtesting, Reporting
 - **Chris Westendorf:** Unsupervised Learning & Stock Selection, Feature Engineering, LSTM Ensembles, Reporting
-</br>
-</br>
-</br>
-<p></p>
-<p></p>
-<p></p>
-<p></p>
+<p><br></p>
+<p><br></p>
+<p><br></p>
